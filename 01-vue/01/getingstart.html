@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    </head>
+    <body>
+        <div id="xxx">hahahha</div>
+        <div id="app">{{msg}}</div>
+        <script>
+            var app = new Vue({
+                // 使用这个 vue实例 接管 哪一个 元素
+                el: '#app',
+
+                // 数据 状态
+                data: {
+                    msg: 'Hello Vue!'
+                }
+            });
+            // app Vue 实例对象
+
+
+            console.log(app.$data.msg);
+            console.log(app.msg);
+            // app.$data.msg = app.msg
+
+            app.msg = 'hello world'
+            // 响应式
+
+            setInterval(() => {
+                app.msg = new Date().toLocaleString()
+            }, 1000);
+        </script>
+    </body>
+</html>
