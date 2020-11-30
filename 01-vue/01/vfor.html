@@ -18,9 +18,16 @@
             <ul>
                 <li v-for="(todo, index) in todos">{{todo.text}}</li>
             </ul>
+            <button v-on:click="clickHandler">追加</button>
+            <button v-on:click="xxx">箭头函数 尝试</button>
+            <p v-on:click="reverseMsg">{{msg}}</p>
+            <hr>
+
+            <p>{{input}}</p>
+            <input type="text" v-model="input">
         </div>
         <script>
-            var app = new Vue({
+           new Vue({
                 el: "#app",
                 data: {
                     friends: ["小明", "小花", "小红"],
@@ -29,19 +36,42 @@
                         { text: "学习 Vue" },
                         { text: "整个牛项目" },
                     ],
+                    msg: 'Hello World!',
+                    input: ''
+                },
+                methods: {
+                    clickHandler: function () {
+                        // this 就是 vue 实例对象 app
+                        // console.log(123, this === app, this.todos);
+                        this.todos.push({ text: "找个好工作" });
+                    },
+                    reverseMsg: function () {
+                        this.msg = this.msg.split('').reverse().join('')
+                    },
+
+                    // 不要使用
+                    xxx: ()=> {
+                        console.log(this);
+                    }
                 },
             });
 
             // friends.forEach((friend, index) => {
-
             // });
 
             // app.friends.push("小刚");
             // app.friends.splice(1, 1);
 
-            // 不会响应
+            // 不会响应 直接修改数组某一项
             // app.friends[1] = '晓华'
+
+            // 可以响应 替换数组某一项
             // app.friends.splice(1, 1, '晓华');
+
+
+            // v-on:click="handler" 事件处理函数写到 methods里面
+            // methods 里面的this  指向 这个vue实例对象 this.msg
+            // v-model
         </script>
     </body>
 </html>

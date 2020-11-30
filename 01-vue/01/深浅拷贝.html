@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <body>
+        <script>
+            var a = 10;
+            var b = a;
+
+            b = 20;
+            console.log(a, b);
+
+            // 栈内存
+
+            var x = {
+                name: "nick",
+            };
+            var y = x;
+            y.name = "mark";
+
+            // 栈内存 堆内存
+
+            // 深拷贝
+            var m = [11, 22, 33];
+            // var n = m.concat();
+            var n = [...m];
+
+            var e = {
+                name: "nick",
+            };
+            // 
+            // var f = Object.assign(e, {age: 18})
+            // var f = Object.assign({},e, {age: 18})
+
+            var f = {...e, age: 18}
+
+
+            // 作业 复习js 数组方法  区分 变异方法 返回新数组  非变异方法 修改原始数组
+        </script>
+    </body>
+</html>
