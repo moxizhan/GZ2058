@@ -9,31 +9,40 @@
     </head>
     <body>
         <div id="xxx">hahahha</div>
-        <div id="app">{{msg}}</div>
+        <hr />
+        <div id="app" v-bind:title="time" v-bind:class="test">{{msg}}</div>
+
+
+        <!-- v-bind: v- vue指令 -->
+
+        <!-- 将这个元素节点的 title attribute 和 Vue 实例的 message property 保持一致 -->
         <script>
             var app = new Vue({
                 // 使用这个 vue实例 接管 哪一个 元素
-                el: '#app',
+                el: "#app",
 
                 // 数据 状态
                 data: {
-                    msg: 'Hello Vue!'
-                }
+                    msg: "Hello Vue!",
+                    test: 'xxx',
+                    time: "页面加载于 " + new Date().toLocaleString(),
+                },
             });
             // app Vue 实例对象
-
 
             console.log(app.$data.msg);
             console.log(app.msg);
             // app.$data.msg = app.msg
 
-            app.msg = 'hello world'
+            app.msg = "hello world";
             // 响应式
 
-            setInterval(() => {
-                app.msg = new Date().toLocaleString()
-                // 本地时间
-            }, 1000);
+            // setInterval(() => {
+            //     app.msg = new Date().toLocaleString()
+            //     // 本地时间
+            // }, 1000);
         </script>
+
+        <!-- {{}}   v-bind: -->
     </body>
 </html>
