@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    </head>
+    <body>
+        <!-- <xxx-yyy>123</xxx-yyy> -->
+
+        <div id="app">
+            <ol>
+                <!-- <li v-for="(todo, index) in todos">{{todo.text}}</li> -->
+
+                <hr />
+                <xxx-yyy name="nick"></xxx-yyy>
+                <xxx-yyy name="mark"></xxx-yyy>
+                <xxx-yyy name="marry" age="17"></xxx-yyy>
+
+                <hr />
+
+                <!-- <todo-item :todo="{text: '12345'}"></todo-item> -->
+
+                <todo-item v-for="(item, index) in todos" :todo="item" />
+            </ol>
+        </div>
+        <script>
+            Vue.component("xxx-yyy", {
+                props: ["name", "age"],
+                template: "<li>{{name}}</li>",
+            });
+
+            Vue.component("todo-item", {
+                props: ['todo'],
+                template: " <li>{{todo.text}}</li>",
+            });
+
+            var vm = new Vue({
+                el: "#app",
+                data: {
+                    todos: [
+                        { text: "学习 JavaScript" },
+                        { text: "学习 Vue" },
+                        { text: "整个牛项目" },
+                    ],
+                },
+                methods: {},
+            });
+        </script>
+    </body>
+</html>

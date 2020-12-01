@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+        <script src="./heros.js"></script>
+        <link
+            rel="stylesheet"
+            href="https://cdn.staticfile.org/minireset.css/0.0.2/minireset.css"
+        />
+        <!-- <style>
+            .heroes {
+                /* text-align: center; */
+            }
+            .heroes li {
+                /* float: left; */
+                /* display: inline-block; */
+            }
+        </style> -->
+        <style>
+            .heroes {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                width: 1200px;
+                margin: 0 auto;
+            }
+            .heroes li {
+                flex-basis: 70px;
+                text-align: center;
+                margin: 8px 5px;
+            }
+            /* .heroes li .card {
+                transform: scale(1.2);
+            } */
+
+            .heroes li .thumb {
+                height: 80px;
+                background-size: cover;
+                background-position: center;
+                border: 4px solid red;
+                border-radius: 8px;
+
+                transform-origin: center bottom;
+                /* transition: all 3s; */
+                transform: skewX(-10deg);
+            }
+
+            .heroes li .thumb:hover {
+                /* transform: skewX(-45deg); */
+            }
+            .heroes li span {
+                background: red;
+                font-size: 12px;
+                padding: 3px;
+                line-height: 16px;
+                display: inline-block;
+                white-space: nowrap;
+                border-radius: 3px;
+
+                /* margin-top: -10px; */
+            }
+
+            .heroes li:hover .card {
+                transform: scale(1.1);
+            }
+            .heroes li:hover span {
+                transform: translateY(-6px);
+            }
+            /*  */
+            .info {
+                text-align: center;
+            }
+            .overlay {
+                display: flex;
+                align-items: center;
+                background: rgba(173, 216, 230, 0.479);
+            }
+            .overlay .left {
+                width: 65%;
+                height: 440px;
+                /* background: rgba(255, 0, 0, 0.239); */
+                background-repeat: no-repeat;
+                background-size: auto 100%;
+                background-position: right center;
+            }
+            .overlay .right {
+                background: green;
+                width: 35%;
+                margin: 30px 0;
+                text-align: center;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="app">
+            <section>
+                <div class="info">
+                    <h1>各具特色的英雄</h1>
+                    <p>不论喜欢哪种游戏方式，你总能找到适合自己玩法的英雄。</p>
+                    <p>掌握他们独特的技能玩法，享受《守望先锋》的无穷乐趣！</p>
+                </div>
+
+                <div class="overlay">
+                    <div
+                        class="left"
+                        :style="{backgroundImage: 'url('+ heroes[current].overlay +')'}"
+                    ></div>
+                    <div class="right">
+                        <h3>{{heroes[current].name}}</h3>
+                        <p>
+                            {{heroes[current].description}}
+                        </p>
+                    </div>
+                </div>
+
+                <ul class="heroes">
+                    <li
+                        @mouseenter="handler"
+                        :data-index="index"
+                        v-for="(hero, index) in heroes"
+                    >
+                        <!-- <img v-bind:src="hero.icon" alt="" /> -->
+                        <div class="card">
+                            <div
+                                class="thumb"
+                                v-bind:style="`background-image: url(${hero.icon})`"
+                            ></div>
+                        </div>
+                        <span>{{hero.name}}</span>
+                    </li>
+                </ul>
+            </section>
+        </div>
+        <script>
+            var app = new Vue({
+                el: "#app",
+                data: {
+                    heroes: heroes,
+                    current: 0,
+                },
+                methods: {
+                    handler: function (e) {
+                        console.log(123, e.target.dataset.index);
+                        this.current = e.target.dataset.index;
+                    },
+                },
+            });
+        </script>
+    </body>
+</html>

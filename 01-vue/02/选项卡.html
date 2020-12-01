@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    </head>
+    <body>
+        <style>
+            li.active {
+                background: red;
+            }
+        </style>
+        <div id="app">
+            <ul>
+                <!-- <li
+                    v-for="(tab, index) in tabs"
+                    :style="{backgroundColor: index === current ? 'red': ''}"
+                    @click="current = index"
+                > -->
+                <!-- <li
+                    v-for="(tab, index) in tabs"
+                    :style="index === current ? {backgroundColor: 'red'} : null"
+                    @click="current = index"
+                >
+                    {{tab.name}}
+                </li> -->
+
+                <!-- <li
+                    v-for="(tab, index) in tabs"
+                    :class="index === current? 'active' : '' "
+                    @click="current = index"
+                >
+                    {{tab.name}}
+                </li> -->
+
+                <li
+                    v-for="(tab, index) in tabs"
+                    :class="{active: index === current}"
+                    @click="current = index"
+                >
+                    {{tab.name}}
+                </li>
+            </ul>
+            <p>{{tabs[current].description}}</p>
+        </div>
+        <script>
+            var app = new Vue({
+                el: "#app",
+                data: {
+                    tabs: [
+                        {
+                            name: "“西格玛”",
+                            description:
+                                "性格古怪的天体物理学家，在一场轨道空间站中的实验事故之后，被改造成了活体兵器。",
+                        },
+                        {
+                            name: "“破坏球”",
+                            description:
+                                "驾驶这台滚动式坦克的是一只经过基因改造的仓鼠，他来自月球基地。",
+                        },
+                        {
+                            name: "D.Va",
+                            description:
+                                "一名前职业玩家，而现在则利用自己的技巧驾驶一台尖端机甲保卫国家。",
+                        },
+                    ],
+                    current: 0,
+                },
+            });
+        </script>
+    </body>
+</html>
