@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    </head>
+    <body>
+        <div id="app">
+            <p>a: {{a}}</p>
+            <!-- <p>b: {{b}}</p> -->
+        </div>
+        <script>
+            var data = { a: 1 };
+
+            var vm = new Vue({
+                el: "#app",
+                data: {
+                    a: 1,
+                    el: "123",
+                    obj: {
+                        name: "nick",
+                        age: 17,
+                    },
+                    // xx: 456
+                },
+                methods: {
+                    xx: function () {
+                        console.log("xx");
+                    },
+                },
+
+                // 生命周期钩子  
+                // 创建完成 可以访问 this
+                created: function() {
+                    console.log('创建', this);
+                },
+                beforeUpdate() {
+                    console.log('更新之前');
+                },
+
+                // 侦听器 监听器
+                watch: {
+                    el: function (n, o) {
+                        console.log(n, o);
+                    },
+                    'obj.age': function (n, o) {
+                        console.log(n, o);
+                    }
+                },
+            });
+
+            console.log(vm.a);
+            console.log(vm.el);
+            console.log(vm.$el);
+            console.log(vm.$data);
+            console.log(vm.xx);
+
+            vm.$watch("a", function (n, o) {
+                console.log(n, o);
+            });
+        </script>
+    </body>
+</html>
