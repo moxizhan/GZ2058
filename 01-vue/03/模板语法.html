@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    </head>
+    <body>
+        <div id="app">
+            <button @click="msg = msg.split(' ').reverse().join(' ')">
+                btn
+            </button>
+            <p>{{msg}}</p>
+
+            <!-- 不推荐使用 使用记得加注释 -->
+            <p v-once>{{msg}}</p>
+
+            <hr />
+
+            <p>{{str}}</p>
+            <p v-text="str"></p>
+
+            <!-- html 会忽略 {{}} -->
+            <p v-html="str">{{msg}}</p>
+            <!-- 绝不要对用户提供的内容使用插值 -->
+
+            <hr />
+            <h1>XSS</h1>
+            <textarea
+                name=""
+                id=""
+                cols="30"
+                rows="10"
+                v-model="something"
+            ></textarea>
+            <p v-html="something"></p>
+
+            <hr />
+
+            <p :title="time">绑定属性</p>
+            <a :href="msg">shuxing</a>
+
+            <input type="text" :disabled="bool" />
+
+            <hr />
+
+            <p>{{1+1}}</p>
+            <p>{{bool ? '真' :'假'}}</p>
+            <p>{{Math.random()}}</p>
+            <p>{{Date.now()}}</p>
+            <p>{{new Array(1,2,3)}}</p>
+
+            <hr />
+            <!-- <img v-bind:[attributeName]="msg" /> -->
+            <!-- 图片懒加载 -->
+
+            <a v-if="!bool" :href="url"  @click.prevent="yyy">百度</a>
+        </div>
+        <script>
+            new Vue({
+                el: "#app",
+                data: {
+                    msg: "hello wrold",
+                    str: '<span style="color: red">This should be red.</span>',
+                    something: "",
+                    // <a href="http://www.baidu.com">百度</a>
+                    // <a onclick="alert('xxx')">百度</a>
+                    // <a onclick="alert(document.cookie)">百度</a>
+                    time: Date.now(),
+                    bool: false,
+                    attributeName: "data-src",
+                    url: 'http://www.baidu.com',
+
+                    xxx: 'hello xxx'
+                },
+                methods: {
+                    yyy: function (e) {
+                        // e.preventDefault();
+                        
+                        alert(123)
+                    }
+                },
+            });
+        </script>
+
+
+<!-- 
+
+options
+el
+data
+methods
+
+beforeCreate
+created
+mounted
+updated
+destoryed
+
+watch
+
+
+
+指令
+
+v-text {{}}
+v-html  XSS
+v-once
+
+v-if 
+v-for
+
+v-on @
+v-bind :
+
+v-model
+
+
+样式
+:style="{backgoundColor: 'red'}"
+:class="{active: boolean}"
+
+
+组件
+props
+tempalte
+
+ -->
+    </body>
+</html>
