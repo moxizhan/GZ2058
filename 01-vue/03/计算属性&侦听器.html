@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    </head>
+    <body>
+        <!-- <div id="app">
+            <p>初始msg： {{message}}</p>
+            <p>反转msg： {{message.split('').reverse().join('')}}</p>
+
+
+            <hr />
+
+            <p>方法反转： {{reverseMsg(message)}}</p>
+
+            <p>计算属性反转： {{reversedMessage}}</p>
+        </div>
+        <script>
+            var app = new Vue({
+                el: "#app",
+                data: {
+                    message: "Hello Vue.js!",
+                },
+
+                computed: {
+                    reversedMessage: function () {
+                        return this.message.split("").reverse().join("");
+                    },
+                    computedNow: function () {
+                        return this.message + "-" + Date.now();
+                    },
+                },
+                // 不同的是计算属性是基于它们的响应式依赖进行缓存的。
+                methods: {
+                    reverseMsg: function (str) {
+                        return str.split("").reverse().join("");
+                    },
+                    methodNow: function () {
+                        return this.message + "-" + Date.now();
+                    },
+                },
+            });
+
+            setInterval(() => {
+                console.log(app.computedNow, app.methodNow());
+            }, 1000);
+        </script> -->
+
+        <div id="app">{{fullName}}</div>
+        <!-- <script>
+            var vm = new Vue({
+                el: "#app",
+                data: {
+                    firstName: "王",
+                    lastName: "小明",
+                    fullName: "王小明",
+                },
+                watch: {
+                    firstName: function (n, o) {
+                        this.fullName = n + this.lastName;
+                    },
+                    lastName: function (n, o) {
+                        this.fullName = this.firstName + n;
+                    },
+                },
+            });
+        </script> -->
+
+        <!-- <script>
+            var vm = new Vue({
+                el: "#app",
+                data: {
+                    firstName: "王",
+                    lastName: "小明",
+                },
+                computed: {
+                    // 计算属性getter
+                    fullName: function () {
+                        return this.firstName + this.lastName
+                    }
+                }
+            });
+        </script> -->
+
+        <script>
+            var vm = new Vue({
+                el: "#app",
+                data: {
+                    firstName: "王",
+                    lastName: "小明",
+                },
+                computed: {
+                    // 计算属性getter
+                    fullName: {
+                        get: function () {
+                            return this.firstName + this.lastName;
+                        },
+                        set: function (n) {
+                            this.firstName = n[0];
+                            this.lastName = n.slice(1);
+                        },
+                    },
+                },
+            });
+
+            // vm.fullName = '黄晓明'
+        </script>
+
+        <!-- 
+
+options
+el
+data
+methods
+
+beforeCreate
+created
+mounted
+updated
+destoryed
+
+watch
+
+
+
+指令
+
+v-text {{}}
+v-html  XSS
+v-once
+
+v-if 
+v-for
+
+v-on @
+v-bind :
+
+v-model
+
+
+样式
+:style="{backgoundColor: 'red'}"
+:class="{active: boolean}"
+
+
+组件
+props
+tempalte
+
+ -->
+    </body>
+</html>
