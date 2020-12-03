@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    </head>
+    <body>
+        <div id="app">
+            <button @click="count++">you clicked {{count}} times !</button>
+            <button @click="count++">you clicked {{count}} times !</button>
+
+            <hr />
+
+            <counter :count="count"></counter>
+            <counter :count="count"></counter>
+
+            <hr />
+            <state-counter></state-counter>
+            <state-counter></state-counter>
+        </div>
+
+        <script>
+            // 无状态组件
+            Vue.component("counter", {
+                props: ["count"],
+                // 子组件永远不要修改props 属性
+                template: "<button>you clicked {{count}} times !</button>",
+            });
+
+            // 有状态组件
+            // 组件是可复用的 Vue 实例
+            Vue.component("state-counter", {
+                // 组件内部 data 必须使用 函数返回值
+                // ？为什么不能直接使用对象
+
+                // 一个组件的 data 选项必须是一个函数
+                data: function () {
+                    return {
+                        count: 0,
+                    };
+                },
+                template:
+                    "<button @click='count++'>you clicked {{count}} times !</button>",
+            });
+
+            new Vue({
+                data: {
+                    count: 0,
+                },
+            }).$mount("#app");
+        </script>
+    </body>
+</html>

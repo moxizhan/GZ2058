@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/axios@0.12.0/dist/axios.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/lodash@4.13.1/lodash.min.js"></script>
+    </head>
+    <body>
+        <div id="app">
+            <input type="text" v-model="something" />
+            <!-- <p>{{xxx}}</p> -->
+            <ul>
+                <!-- <li v-for="(item, index) in suggests">{{item[0]}}</li> -->
+                <item v-for="(item, index) in suggests" :text="item[0]"></item>
+            </ul>
+        </div>
+        <script>
+            Vue.component("item", {
+                props: ["text"],
+                template: "<li>{{text}}</li>",
+            });
+
+            var app = new Vue({
+                el: "#app",
+                data: {
+                    something: "",
+                    xxx: 0,
+                    suggests: [],
+                },
+                // updated: function () {
+                //     console.log(123);
+                // },
+                methods: {
+                    getData: function () {
+                        axios
+                            .get(
+                                "http://api.kele8.cn/agent/https://suggest.taobao.com/sug?code=utf-8&q=" +
+                                    this.something
+                            )
+                            .then((response) => {
+                                console.log(this, response.data.result);
+                                this.suggests = response.data.result;
+                            });
+                    },
+                    // zzz: console.log(this, 123),
+                    // yyy: function () {
+                    //     console.log(this, 123);
+                    //     return ()=> {
+                    //         console.log(this);
+                    //     };
+                    // },
+                },
+                // 生命周期 【创建】之后才有 this
+                created() {
+                    this.debouncedGetData = _.debounce(this.getData, 500);
+                },
+
+                watch: {
+                    something: function (n, o) {
+                        console.log(n);
+                        this.debouncedGetData();
+                    },
+                },
+            });
+        </script>
+    </body>
+</html>
