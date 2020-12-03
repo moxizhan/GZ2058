@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    </head>
+    <body>
+        <div id="app">
+            <new-todo></new-todo>
+
+            <ul class="list">
+                <todo-item v-for="(todo, index) in todos"></todo-item>
+            </ul>
+        </div>
+
+        <script>
+            Vue.component("new-todo", {
+                template: "<p><input type='text'></p>",
+            });
+            Vue.component("todo-item", {
+                template: "<p>item</p>",
+            });
+
+            new Vue({
+                el: "#app",
+                data: {
+                    todos: ["学习node", "学习vue", '学习vueRouter'],
+                },
+            });
+        </script>
+    </body>
+</html>

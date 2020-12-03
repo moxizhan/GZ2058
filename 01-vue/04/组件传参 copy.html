@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    </head>
+    <body>
+        <div id="app">
+            <h1>Parent: {{msg}}</h1>
+            <hr />
+            <!-- <child :m="msg">0</child> -->
+            <child :m="msg" @xxx="xxxHandler">xxx</child>
+        </div>
+        <script>
+            Vue.component("child", {
+                props: ["m"],
+                template: `<p @click='clickHandler'><slot></slot> {{m}}</p>`,
+                methods: {
+                    clickHandler: function () {
+                        console.log(456);
+                        this.$emit('xxx', Math.random())
+                    },
+                },
+            });
+
+            var parent = new Vue({
+                el: "#app",
+                data: {
+                    msg: "hello wrold",
+                },
+                methods: {
+                    xxxHandler: function (a) {
+                        console.log(123, a);
+                        // this.msg = 'hello vue'
+
+                        this.msg = a
+                    },
+                },
+            });
+        </script>
+    </body>
+</html>

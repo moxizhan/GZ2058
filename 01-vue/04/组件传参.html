@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    </head>
+    <body>
+        <div id="app">
+            <p>parent: {{msg}} - {{count}}</p>
+            <button @click="count++">+1</button>
+            <hr />
+            <!-- 子传父 1 调用组件上面 绑定 自定义事件 -->
+            <child :c="count" v-on:xxx-yyy="count+=5">+5</child>
+            <hr />
+
+            <!-- 自定义组件 使用的时候 标签对 里面的内容 就是 slot -->
+            <child :c="count" v-on:xxx-yyy="count+=10">+10</child>
+
+            <hr />
+
+            <child :c="count" v-on:xxx-yyy="zzzHandle">random</child>
+        </div>
+        <script>
+            Vue.component("child", {
+                props: ["c"],
+                data: function () {
+                    return {
+                        msg: "hello child",
+                    };
+                },
+                // 组件模板 单个根元素
+                template: `
+                <div>
+                    <p>child: {{msg}} -{{c}}</p>
+                    <button @click="$emit('xxx-yyy', Math.random())">
+                        <slot></slot>
+                    </button>
+                </div>
+                `,
+                // 子组件里面 使用 $emit 触发绑定在这个 组件上的 自定义事件
+                // 触发自定义事件 还可以带上参数
+            });
+
+            var parent = new Vue({
+                el: "#app",
+                data: {
+                    msg: "hello parent",
+                    count: 10,
+                },
+                methods: {
+                    zzzHandle: function (a) {
+                        // console.log('zzzHandle', a);
+                        this.count = a
+                    }
+                },
+            });
+        </script>
+    </body>
+</html>
