@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    </head>
+    <body>
+        <style>
+            .test {
+                text-decoration: underline;
+            }
+            .active {
+                background: lightblue;
+            }
+            .err {
+                color: red;
+            }
+        </style>
+        <div id="app">
+            <h1>绑定 HTML Class</h1>
+            <div class="test" :class="{active: isActive, err:isError }">
+                对象语法
+            </div>
+            <!-- 上面的语法表示 active 这个 class 存在与否将取决于数据 property isActive -->
+
+            <div class="test" :class="objectClass">
+                绑定的数据对象不必内联定义在模板里
+            </div>
+            <div :class="classObject">绑定一个返回对象的计算属性</div>
+
+            <h5 :class="[activeClass, errorClass]">数组语法</h5>
+            <h5 :class="[isActive ? activeClass: '', errorClass]">
+                数组三目运算符
+            </h5>
+
+            <h5 :class="[{a:isActive}, errorClass]">数组混合对象</h5>
+
+            <p>动态绑定class 引号里面的值 分情况</p>
+            <p :class='test'>1. "test" test是一个状态 字符串 对象 数组</p>
+            <p :class='{test: testA}'>2. "{test: testA}" test是一个类名，testA是状态 把对象的键名当成class类名</p>
+            <p :class='["tt",errorClass]'>3. "[test1,test2]" test1是一个状态 字符串 表达式 对象</p>
+
+        </div>
+        <script>
+            new Vue({
+                el: "#app",
+                data: {
+                    isActive: false,
+                    isError: true,
+
+                    objectClass: {
+                        active: false,
+                        err: true,
+                    },
+                    activeClass: "a1 a2",
+                    errorClass: "e1 e2",
+                },
+                computed: {
+                    classObject: function () {
+                        return {
+                            active: this.isActive && !this.isError,
+                        };
+                    },
+                },
+            });
+        </script>
+    </body>
+</html>
