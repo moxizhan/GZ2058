@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    </head>
+    <body>
+        <div id="app">
+            <button @click="click1">btn1</button>
+            <button @click="click2(222)">btn2</button>
+
+            <button @click="click3(333, 444)">btn3</button>
+            <button @click="click4(333, $event)">btn4</button>
+            <!-- $event 特殊参数 代指 原生dom事件对象 -->
+
+            <hr />
+            <!-- 修饰符 -->
+            <a href="http://www.baidu.com" @click.prevent="preventHandle"
+                >百度</a
+            >
+
+            <div
+                @click.self="grand"
+                style="width: 300px; height: 300px; background: red"
+            >
+                grand
+                <div
+                    @click="parent"
+                    style="width: 200px; height: 200px; background: green"
+                >
+                    parent
+                    <div
+                        @click="child"
+                        style="width: 100px; height: 100px; background: blue"
+                    >
+                        child
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- lazy .number .trim -->
+            <input
+                type="text"
+                name=""
+                id=""
+                @keyup.enter="log"
+                v-model.lazy.number.trim="something"
+            />
+
+            <hr />
+
+            <form action="" method="GET">
+                <input type="text" value="123" v-model="text" />
+                <textarea v-model="text"></textarea>
+
+                <input
+                    type="radio"
+                    id="input"
+                    name="gender"
+                    value="男"
+                    checked
+                    v-model="gender"
+                />
+                <input
+                    type="radio"
+                    id="input"
+                    name="gender"
+                    value="女"
+                    v-model="gender"
+                />
+
+                <hr />
+                <input
+                    type="checkbox"
+                    name="fav"
+                    id=""
+                    value="苹果"
+                />苹果
+                <input type="checkbox" name="fav" id="" v-model="fav" value="葡萄" />葡萄
+                <input type="checkbox" name="fav" id="" v-model="fav" value="香蕉" />香蕉
+
+                <input type="submit" value="xxx" />
+            </form>
+        </div>
+
+        <!-- stop prevent self capture once -->
+
+        <script>
+            new Vue({
+                el: "#app",
+                data: {
+                    something: "",
+                    text: "456",
+                    gender: "女",
+                    fav: ['香蕉']
+                },
+                methods: {
+                    click1: function (e) {
+                        console.log("click1", e);
+                    },
+                    click2: function (n) {
+                        console.log("click2", n);
+                    },
+                    click3: function (e, f) {
+                        console.log("click3", e, f);
+                    },
+                    click4: function (e, f) {
+                        console.log("click4", e, f);
+                    },
+
+                    //
+                    preventHandle: function () {
+                        console.log(123);
+                    },
+
+                    //
+                    grand: function () {
+                        console.log("grand");
+                    },
+                    parent: function () {
+                        console.log("parent");
+                    },
+                    child: function () {
+                        console.log("child");
+                    },
+
+                    log: function () {
+                        console.log(this.something);
+                    },
+                },
+            });
+        </script>
+    </body>
+</html>
