@@ -17,6 +17,14 @@
                     :i="index"
                     @translate-remove="removeTodo"
                 ></todo-item>
+
+                <!-- 方法2 -->
+                <!-- <todo-item
+                    v-for="(todo, index) in todos"
+                    :todo="todo"
+                    :i="index"
+                    @translate-remove="removeTodo(index)"
+                ></todo-item> -->
             </ul>
         </div>
 
@@ -50,6 +58,11 @@
                         // console.log('remove');
                         this.$emit("translate-remove", i);
                     },
+
+// 方法2
+                    // clickHandler: function () {
+                    //     this.$emit("translate-remove");
+                    // },
                 },
             });
 
