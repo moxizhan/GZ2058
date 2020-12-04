@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    </head>
+    <body>
+        <div id="app">
+            <new-todo @translate-text="addTodo"></new-todo>
+
+            <ul class="list">
+                <todo-item
+                    v-for="(todo, index) in todos"
+                    :todo="todo"
+                    :i="index"
+                    @translate-remove="removeTodo"
+                ></todo-item>
+            </ul>
+        </div>
+
+        <script>
+            Vue.component("new-todo", {
+                data: function () {
+                    return {
+                        text: "",
+                    };
+                },
+                template: `
+                <p>
+                    <input type='text' v-model='text'>
+                    <button @click='clickHandler'>add</button>
+                </p>
+                `,
+                methods: {
+                    clickHandler: function () {
+                        console.log("child", this.text);
+                        this.$emit("translate-text", this.text);
+                        this.text = "";
+                    },
+                },
+            });
+            Vue.component("todo-item", {
+                props: ["todo", "i"],
+                template:
+                    "<li>{{todo}}<button @click='clickHandler(i)'>remove</button></li>",
+                methods: {
+                    clickHandler: function (i) {
+                        // console.log('remove');
+                        this.$emit("translate-remove", i);
+                    },
+                },
+            });
+
+            new Vue({
+                el: "#app",
+                data: {
+                    todos: ["学习node", "学习vue", "学习vueRouter"],
+                },
+                methods: {
+                    addTodo: function (text) {
+                        console.log("parent", text);
+                        this.todos.push(text);
+                    },
+                    removeTodo: function (index) {
+                        console.log(456, index);
+                        this.todos.splice(index, 1);
+                    },
+                },
+            });
+        </script>
+    </body>
+</html>
