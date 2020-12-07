@@ -1,29 +1,60 @@
 <template>
   <div id="app">
-    <Test :msg="msg" @change-msg="xxx" >我是插槽内容</Test>
-    <!-- <HelloWorld msg="Welcome to Your Vue.js App"/> -->
+    <AddTodo @add-todo="addTodo" />
+    <TodoList :todos="todos" @toggle="toggleHandler" />
   </div>
 </template>
 
 <script>
-// import HelloWorld from './components/HelloWorld.vue'
-import Test from "./components/Test.vue";
+import AddTodo from "./components/AddTodo.vue";
+import TodoList from "./components/TodoList.vue";
 
 export default {
   name: "App",
   components: {
-    // HelloWorld
-    Test,
+    AddTodo,
+    TodoList,
   },
   data: function () {
     return {
-      msg: "Hello Vue.js",
+      todos: [
+        {
+          complated: false,
+          text: "1111",
+          id: 1,
+        },
+        {
+          complated: true,
+          text: "2222",
+          id: 2,
+        },
+        {
+          complated: false,
+          text: "4444",
+          id: 4,
+        },
+      ],
     };
   },
+
   methods: {
-    xxx: function (a) {
-      console.log(123, a);
-      this.msg = a;
+    toggleHandler: function (id) {
+      //   console.log(a);
+      this.todos = this.todos.map((todo) => {
+        if (todo.id === id) {
+          return { ...todo, complated: !todo.complated };
+        }
+
+        return { ...todo };
+      });
+    },
+    addTodo: function (text) {
+      console.log(text);
+      this.todos.push({
+        text,
+        compalted: false,
+        id: this.todos.length ? this.todos[this.todos.length - 1].id + 1 : 0,
+      });
     },
   },
 };
