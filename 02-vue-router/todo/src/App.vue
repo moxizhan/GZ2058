@@ -3,7 +3,7 @@
 <template>
   <!-- npm cache clean -->
   <div id="app">
-    <AddTodo @add-todo="addTodo" />
+    <AddTodo @add-todo="addTodo" @toggle-all="toggleAll" :isAllComplated="isAllComplated" />
     <TodoList
       :todos="currentTodos"
       @toggle="toggleHandler"
@@ -11,7 +11,7 @@
       @updata-todo="updataTodo"
     />
 
-    <TodoFilter :filter="currentFilter" @change-filter="changeFilter" :left="activeTodos.length" />
+    <TodoFilter :filter="currentFilter" @clear-all-complated="clearAllComplated" @change-filter="changeFilter" :left="activeTodos.length" />
   </div>
 </template>
 
@@ -73,6 +73,10 @@ export default {
           return this.todos;
       }
     },
+
+    isAllComplated: function () {
+      return this.todos.length === this.complatedTodos.length
+    }
   },
 
   methods: {
@@ -117,6 +121,27 @@ export default {
     changeFilter: function (filter) {
       this.currentFilter = filter;
     },
+    toggleAll: function () {
+      if (this.isAllComplated) {
+        // 全部取false
+        // this.todos.forEach((element,index) => {
+        //   // element.complated = false
+        //   // this.todos[index].complated = false
+        //   // vue 加强过
+        // });
+
+        this.todos = this.todos.map((todo)=> {
+          return {...todo, complated: false}
+        })
+      } else {
+        this.todos = this.todos.map((todo)=> {
+          return {...todo, complated: true}
+        })
+      }
+    },
+    clearAllComplated: function () {
+      this.todos = this.activeTodos
+    }
   },
 };
 </script>

@@ -1,0 +1,53 @@
+.footer{
+  display: flex;
+  align-items: center;
+  border-top: 1px solid #ccc;
+  height: 44px;
+  color: #777;
+  font-size: 14px;
+
+  .left{
+    margin-left: 12px;
+    width: 130px;
+  }
+  
+  .btn{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+
+    div{
+      margin-right: 26px;
+      padding: 2px 6px;
+      
+      &.active{
+        box-shadow: 0 0 1px 1px #ccc !important;
+        cursor: pointer;
+        border-radius: 4px;
+      }
+      &:hover{
+        box-shadow: 0 0 1px 1px #eee;
+        cursor: pointer;
+        border-radius: 4px;
+      }
+    }
+  }
+
+  .rightBox{
+    height: 100%;
+    width: 214px;
+    line-height: 44px;
+    .right{
+      width: 100p;
+      opacity: 0;
+  
+      &.active{
+        cursor: pointer;
+        opacity: 1;
+      }
+      &:hover{
+        text-decoration: underline;
+      }
+    }
+  }
+}

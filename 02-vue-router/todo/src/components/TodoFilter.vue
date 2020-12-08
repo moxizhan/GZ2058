@@ -19,6 +19,8 @@
     >
       complated
     </button>
+
+    <span @click="$emit('clear-all-complated')">❌ALL</span>
   </div>
 </template>
 

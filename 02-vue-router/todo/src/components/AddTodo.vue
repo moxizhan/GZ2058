@@ -1,6 +1,6 @@
 <template>
   <div>
-    <span>🎎</span>
+    <span @click="$emit('toggle-all')">{{isAllComplated? '🛑': '⭕'}}</span>
     <input
       type="text"
       @keyup.enter="
@@ -15,6 +15,7 @@
 <script>
 export default {
   name: "AddTodo",
+  props: ['isAllComplated'],
   data: function () {
     return {
       text: "",

@@ -1,0 +1,48 @@
+.body{
+
+  ul{
+    li{
+      border-top: 1px solid #ccc;
+      height: 50px;
+      display: flex;
+      align-items: center;
+
+      input[type='checkbox']{
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        margin: 0 10px;
+      }
+  
+      input[type='text']{
+        width: 94%;
+        height: 100%;
+        border: none;
+        margin-left: 14px;
+        background: #fff;
+        font-size: 22px;
+        // outline: none;
+
+        &.del{
+          text-decoration: line-through;
+          color: #ccc;
+        }
+      }
+ 
+
+      span{
+        display: inline-block;
+        font-size: 30px;
+        color: #cc9a9a;
+        margin-right: 18px;
+        opacity: 0;
+
+      }
+
+      &:hover span{
+        color: #af5b5e;
+        opacity: 1;
+      }
+    }
+  }
+}
