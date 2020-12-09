@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+        <script src="https://unpkg.com/vue-router@2.0.0/dist/vue-router.js"></script>
+    </head>
+    <body>
+        <!-- Vue VueRouter -->
+
+        <div id="app">
+            <h1>Hello App!</h1>
+            <p>
+                <!-- 使用 router-link 组件来导航. -->
+                <!-- 通过传入 `to` 属性指定链接. -->
+                <!-- <router-link> 默认会被渲染成一个 `<a>` 标签 -->
+                <router-link to="/about">go to about</router-link>
+                <router-link to="/home">go to home</router-link>
+
+                <hr>
+                <router-link to="/user/123">user 123</router-link>
+                <router-link to="/user/456">user 456</router-link>
+                
+                <hr>
+
+                <router-link to="/user/123/post/1234">/user/123/post/123</router-link>
+                <router-link to="/user/456/post/4567">/user/456/post/4567</router-link>
+
+
+                <hr>
+                <router-link to="/search?s=男鞋">/search?s=男鞋</router-link>
+                <router-link to="/search?s=女装">/search?s=女装</router-link>
+
+
+            </p>
+
+            <!-- 路由出口 -->
+            <!-- 路由匹配到的组件将渲染在这里 -->
+            <router-view></router-view>
+        </div>
+        <!-- <script>
+            const Home = { template: "<div>Home</div>" };
+            const About = { template: "<div>About</div>" };
+
+            new Vue({
+                el: "#app",
+                data: {},
+
+                router: new VueRouter({
+                    routes: [
+                        { path: "/about", component: About },
+                        { path: "/home", component: Home },
+                    ],
+                }),
+            });
+        </script> -->
+
+        <script>
+            const Home = {
+                template: "<div>Home</div>",
+                created: function () {
+                    console.log(this, this.$router, this.$route);
+                },
+            };
+            const About = { template: "<div>About</div>" };
+            // const User = { template: "<div>User {{$route.params.id}} </div>",
+            //     created() {
+            //         console.log('created',this.$route.params);
+            //     },
+            //     updated() {
+            //         console.log('updated',this.$route.params);
+            //     },
+            //  };
+
+            const User = { template: "<div>User</div>",
+                created() {
+                    console.log('created',this.$route.params);
+                },
+                updated() {
+                    console.log('updated',this.$route.params);
+                },
+                watch: {
+                    '$route.params.id': function (n,o) {
+                        console.log('watch', n, o);
+                    },
+                
+                    $route: function (to, from) {
+                        console.log('watch',to, from);
+                    }
+                
+                },
+                // beforeRouteUpdate (to, from, next) {
+                //     // 在当前路由改变，但是该组件被复用时调用
+                //     // 举例来说，对于一个带有动态参数的路径 /foo/:id，在 /foo/1 和 /foo/2 之间跳转的时候，
+                //     // 由于会渲染同样的 Foo 组件，因此组件实例会被复用。而这个钩子就会在这个情况下被调用。
+                //     // 可以访问组件实例 `this`
+                //     console.log('beforeRouteUpdate', to, from);
+                //     // 一定要调用该方法来 resolve 这个钩子。
+                //     next()
+                // },
+             };
+
+             const Post = { template: "<div>Post</div>",
+                watch: {
+                    $route: function (to, from) {
+                        console.log('watch',to, from);
+                    }
+                
+                },
+             };
+
+            // 路由映射表
+            const routes = [
+                { path: "/about", component: About },
+                { path: "/home", component: Home },
+                { path: "/user/:userid/post/:postid", component: Post },
+                // 动态路径参数 以冒号开头
+                { path: "/user/:id", component: User, beforeEnter: function (to,from, next) {
+                    console.log('beforeEnter', to, from);
+                    next()
+                }},
+
+                {path: '/search', component: {template: '<div>{{$route.query.s}}</div>'}},
+
+                {path: '/*', component: {template: '<div>404</div>'}}
+                // 含有通配符的路由应该放在最后
+            ];
+
+            const router = new VueRouter({
+                routes: routes,
+            });
+
+            new Vue({
+                el: "#app",
+                data: {},
+
+                router: router,
+            });
+
+            // 通过注入路由器，我们可以在任何组件内通过 this.$router 访问路由器，
+            // 也可以通过 this.$route 访问当前路由
+        </script>
+    </body>
+</html>

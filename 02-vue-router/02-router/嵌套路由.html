@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+        <script src="https://unpkg.com/vue-router@2.0.0/dist/vue-router.js"></script>
+    </head>
+    <body>
+        <!-- Vue VueRouter -->
+
+        <div id="app">
+            <h1>Hello App!</h1>
+            <p>
+                <router-link to="/user/nick">/user/nick</router-link>
+            </p>
+
+            <router-view></router-view>
+        </div>
+
+        <script>
+            const User = {
+                template: `
+                <div>
+                    <h1>{{$route.params.id}} - User</h1>
+                    <router-link to="/user/nick/profile"
+                    >/user/nick/profile</router-link
+                >
+                <router-link to="/user/nick/post">/user/nick/post</router-link>
+
+                <router-view></router-view>
+                </div>
+                `,
+            };
+
+            const Profile = { template: "<div>{{$route.params.id}} Profile</div>" };
+            const Post = { template: "<div>{{$route.params.id}} Post</div>" };
+
+            const routes = [
+                {
+                    path: "/user/:id",
+                    component: User,
+                    children: [
+                        {
+                            path: "profile",
+                            component: Profile
+                        },
+                        {
+                            path: "post",
+                            component: Post
+                        },
+                    ],
+                },
+            ];
+
+            // const User = {
+            //     template: `<div>
+            //         <h1>User</h1> 
+            //             <router-link to="/user/nick/profile"
+            //          >/user/nick/profile</router-link
+            //     >
+            //    <router-link to="/user/nick/post">/user/nick/post</router-link>
+            //     </div>`,
+            // };
+            // // 路由映射表
+            // const routes = [
+            //     { path: "/user/:id", component: User },
+            //     {
+            //         path: "/user/:id/profile",
+            //         component: {
+            //             template: "<div>{{$route.params.id}} profile</div>",
+            //         },
+            //     },
+            //     {
+            //         path: "/user/:id/post",
+            //         component: {
+            //             template: "<div>{{$route.params.id}} post</div>",
+            //         },
+            //     },
+            // ];
+
+            const router = new VueRouter({
+                routes: routes,
+            });
+
+            new Vue({
+                el: "#app",
+                data: {},
+
+                router: router,
+            });
+
+            // 通过注入路由器，我们可以在任何组件内通过 this.$router 访问路由器，
+            // 也可以通过 this.$route 访问当前路由
+        </script>
+    </body>
+</html>

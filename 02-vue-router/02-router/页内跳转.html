@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <body>
+        <div style="position: fixed; top: 0; right: 0">
+            <a href="#a">a</a>
+            <a href="#b">b</a>
+        </div>
+        <script>
+            window.onhashchange = function (e) {
+                console.log(e, window.location.hash);
+            };
+
+            setTimeout(() => {
+                const state = { page_id: 1, user_id: 5 };
+                const title = "";
+                const url = "hello-world.html";
+
+                history.pushState(state, title, url);
+            }, 0);
+        </script>
+
+        <h1 id="a">a</h1>
+        <br />s<br />s<br />s<br />s<br />s<br />s<br />s<br />s<br />s<br />s
+        <br />s<br />s<br />s<br />s<br />s<br />s<br />s<br />s<br />s<br />s
+        <br />s<br />s<br />s<br />s<br />s<br />s<br />s<br />s<br />s<br />s
+        <br />s<br />s<br />s<br />s<br />s<br />s<br />s<br />s<br />s<br />s
+        <br />s<br />s<br />s<br />s<br />s<br />s<br />s<br />s<br />s<br />s
+        <h1 id="b">b</h1>
+
+        <br />s<br />s<br />s<br />s<br />s<br />s<br />s<br />s<br />s<br />s
+        <br />s<br />s<br />s<br />s<br />s<br />s<br />s<br />s<br />s<br />s
+        <br />s<br />s<br />s<br />s<br />s<br />s<br />s<br />s<br />s<br />s
+        <br />s<br />s<br />s<br />s<br />s<br />s<br />s<br />s<br />s<br />s
+        <br />s<br />s<br />s<br />s<br />s<br />s<br />s<br />s<br />s<br />s
+        <br />s<br />s<br />s<br />s<br />s<br />s<br />s<br />s<br />s<br />s
+        <h1 id="c">c</h1>
+
+        <br />s<br />s<br />s<br />s<br />s<br />s<br />s<br />s<br />s<br />s
+        <br />s<br />s<br />s<br />s<br />s<br />s<br />s<br />s<br />s<br />s
+        <br />s<br />s<br />s<br />s<br />s<br />s<br />s<br />s<br />s<br />s
+        <br />s<br />s<br />s<br />s<br />s<br />s<br />s<br />s<br />s<br />s
+        <br />s<br />s<br />s<br />s<br />s<br />s<br />s<br />s<br />s<br />s
+        <h1 id="d">d</h1>
+
+        <br />s<br />s<br />s<br />s<br />s<br />s<br />s<br />s<br />s<br />s
+        <br />s<br />s<br />s<br />s<br />s<br />s<br />s<br />s<br />s<br />s
+        <br />s<br />s<br />s<br />s<br />s<br />s<br />s<br />s<br />s<br />s
+        <br />s<br />s<br />s<br />s<br />s<br />s<br />s<br />s<br />s<br />s
+        <br />s<br />s<br />s<br />s<br />s<br />s<br />s<br />s<br />s<br />s
+        <br />s<br />s<br />s<br />s<br />s<br />s<br />s<br />s<br />s<br />s
+    </body>
+</html>
