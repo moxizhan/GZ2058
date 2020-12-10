@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+        <script src="https://unpkg.com/vue-router@2.0.0/dist/vue-router.js"></script>
+    </head>
+    <body>
+        <div id="app">
+            <h1>我是根组件内容</h1>
+
+            <hr />
+
+            <router-link to="/about">/about</router-link>
+            <router-link to="/home">/home</router-link>
+            <router-link to="/user/nick">/user/nick</router-link>
+
+            <hr />
+            <router-view></router-view>
+        </div>
+
+        <script>
+            const About = { template: "<div>about page</div>" };
+            const Home = { template: "<div>Home page</div>" };
+
+            const User = {
+                template: `<div>
+                    <h3>User root page 头像 {{$route.params.id}}</h3>
+                    <hr />
+                    <router-link :to="'/user/'+ $route.params.id +'/following'">/user/{{$route.params.id}}/following</router-link>
+                    <router-link :to="'/user/'+ $route.params.id +'/followers'">/user/{{$route.params.id}}/followers</router-link>
+                    <hr />
+
+                    <router-view></router-view>
+
+                </div>`,
+            };
+
+            const Following = { template: "<div>关注</div>" };
+            const Followers = { template: "<div>粉丝</div>" };
+
+            const routes = [
+                { path: "/", component: { template: "<div>首页内容</div>" } },
+                { path: "/about", component: About },
+                { path: "/home", component: Home },
+                {
+                    path: "/user/:id",
+                    component: User,
+                    children: [
+                        {
+                            path: "/",
+                            component: { template: "<div>用户文章</div>" },
+                        },
+
+                        { path: "following", component: Following },
+                        { path: "/user/:id/followers", component: Followers },
+                    ],
+                },
+            ];
+
+            const router = new VueRouter({
+                routes,
+            });
+
+            new Vue({
+                router,
+                el: "#app",
+            });
+        </script>
+    </body>
+</html>

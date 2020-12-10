@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+        />
+    
+    <body>
+        <div id="app">
+            <button @click="condition=!condition">toggle</button>
+
+            <!-- <transition name="fade">
+                <div v-if="condition" style="width: 100px; height: 100px; margin: 0 auto; background: red;">box</div>
+            </transition> -->
+
+
+
+            <transition name="custom-classes-transition" enter-active-class="animate__animated animate__backInDown
+            " leave-active-class="animate__animated animate__bounceOutUp
+            ">
+                <div v-if="condition" style="width: 100px; height: 100px; margin: 0 auto; background: red;">box</div>
+            </transition>
+        </div>
+
+        <style>
+            .fade-enter {
+                opacity: 0;
+            }
+            .fade-enter-active {
+                transition: all 0.3s;
+            }
+            .fade-enter-to {
+                opacity: 1;
+            }
+
+            .fade-leave {
+                opacity: 1;
+            }
+            .fade-leave-active {
+                transition: all cubic-bezier(0.5,-0.5, 1, 1) 0.3s;
+            }
+            .fade-leave-to {
+                opacity: 0;
+                transform: translateY(-200px);
+            }
+        </style>
+
+        <script>
+            new Vue({
+                el: "#app",
+                data: {
+                    condition: false
+                }
+            });
+        </script>
+    </body>
+</html>
