@@ -1,0 +1,83 @@
+[
+    {
+        "href": "/heroes/tracer",
+        "name": "“猎空”",
+        "role": "输出",
+        "id": "damage",
+        "description": "一名前守望先锋特工，同时也是可以穿梭时间的充满正义的冒险家。",
+        "overlay": "https://overwatch.nosdn.127.net/1/images/v2/home/overlay/tracer.png",
+        "icon": "https://overwatch.nosdn.127.net/1/images/heroes/tracer/icon-portrait.png"
+    },
+    {
+        "href": "/heroes/widowmaker",
+        "name": "“黑百合”",
+        "role": "输出",
+        "id": "damage",
+        "description": "一名完美的杀手：耐心、果断、无情。没有任何情感且事后毫无悔意。",
+        "overlay": "https://overwatch.nosdn.127.net/1/images/v2/home/overlay/widowmaker.png",
+        "icon": "https://overwatch.nosdn.127.net/1/images/heroes/widowmaker/icon-portrait.png"
+    },
+    {
+        "href": "/heroes/baptiste",
+        "name": "巴蒂斯特",
+        "role": "支援",
+        "id": "support",
+        "description": "一位配备了新型治疗设备的精英战地医疗兵。",
+        "overlay": "https://overwatch.nosdn.127.net/1/assets/images/hero/baptiste/full-portrait.png",
+        "icon": "https://overwatch.nosdn.127.net/1/assets/images/hero/baptiste/icon-portrait.png"
+    },
+    {
+        "href": "/heroes/ana",
+        "name": "安娜",
+        "role": "支援",
+        "id": "support",
+        "description": "守望先锋的创始成员之一，“起死回生”重返战场保护亲人和朋友。",
+        "overlay": "https://overwatch.nosdn.127.net/1/images/v2/home/overlay/ana.png",
+        "icon": "https://overwatch.nosdn.127.net/1/images/heroes/ana/icon-portrait.png"
+    },
+    {
+        "href": "/heroes/brigitte",
+        "name": "布丽吉塔",
+        "role": "支援",
+        "id": "support",
+        "description": "一位渴望冒险，希望惩强扶弱的重装战士。",
+        "overlay": "https://overwatch.nosdn.127.net/1/images/v2/home/overlay/brigitte.png",
+        "icon": "https://overwatch.nosdn.127.net/1/images/heroes/brigitte/icon-portrait.png"
+    },
+    {
+        "href": "/heroes/lucio",
+        "name": "卢西奥",
+        "role": "支援",
+        "id": "support",
+        "description": "一位国际名人，通过音乐和巡演激发社会正能量。",
+        "overlay": "https://overwatch.nosdn.127.net/1/images/v2/home/overlay/lucio.png",
+        "icon": "https://overwatch.nosdn.127.net/1/images/heroes/lucio/icon-portrait.png"
+    },
+    {
+        "href": "/heroes/mercy",
+        "name": "“天使”",
+        "role": "支援",
+        "id": "support",
+        "description": "一名集顶尖的治疗者、出色的科学家和坚定的和平主义者于一身的守护天使。",
+        "overlay": "https://overwatch.nosdn.127.net/1/images/v2/home/overlay/mercy.png",
+        "icon": "https://overwatch.nosdn.127.net/1/images/heroes/mercy/icon-portrait.png"
+    },
+    {
+        "href": "/heroes/moira",
+        "name": "莫伊拉",
+        "role": "支援",
+        "id": "support",
+        "description": "一位天才基因科学家，无视道德的束缚，一心追求科学发现。",
+        "overlay": "https://overwatch.nosdn.127.net/1/images/v2/home/overlay/moira-full-portrait.png",
+        "icon": "https://overwatch.nosdn.127.net/1/assets/images/hero/moira/icon-portrait.png"
+    },
+    {
+        "href": "/heroes/zenyatta",
+        "name": "禅雅塔",
+        "role": "支援",
+        "id": "support",
+        "description": "一位游走于世界寻找灵魂升华之道的机械僧侣。",
+        "overlay": "https://overwatch.nosdn.127.net/1/images/v2/home/overlay/zenyatta.png",
+        "icon": "https://overwatch.nosdn.127.net/1/images/heroes/zenyatta/icon-portrait.png"
+    }
+]
