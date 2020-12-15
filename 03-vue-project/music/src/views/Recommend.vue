@@ -4,7 +4,13 @@
       >推荐歌单</RecommendPlayList
     >
 
-    <RecommendNewMusic @translate-music="$emit('translate-music', $event)" :newSongs="newSongs">最新音乐</RecommendNewMusic>
+    <RecommendNewMusic
+      @update:music="$emit('update:music', $event)"
+      :newSongs="newSongs"
+      :currentMusic="$attrs.currentMusic"
+      :paused="$attrs.paused"
+      >最新音乐</RecommendNewMusic
+    >
   </div>
 </template>
 

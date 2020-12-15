@@ -1,10 +1,23 @@
 <template>
   <div id="app">
-    <Play :currentMusic="currentMusic" />
+    <Play
+      v-if="currentMusic"
+      :currentMusic="currentMusic"
+      @update:paused="paused = $event"
+    />
 
     <HomeNav v-if="$route.meta.isShowNav" />
 
-    <router-view @translate-music="currentMusic = $event" />
+    <!-- <router-view
+      @translate-music="currentMusic = $event"
+      v-bind:currentMusic.sync="currentMusic"
+    /> -->
+
+    <router-view
+      @update:music="currentMusic = $event"
+      v-bind:currentMusic="currentMusic"
+      v-bind:paused="paused"
+    />
   </div>
 </template>
 
@@ -19,6 +32,7 @@ export default {
   data: function () {
     return {
       currentMusic: null,
+      paused: null,
     };
   },
 };

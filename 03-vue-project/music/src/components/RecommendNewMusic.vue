@@ -3,7 +3,14 @@
     <!-- <h3><slot></slot></h3> -->
     <BorderedTitle><slot></slot></BorderedTitle>
     <ul>
-      <SongItem @translate-music="$emit('translate-music', $event)" v-for="song in newSongs" :key="song.id" :item="song" />
+      <SongItem
+        @update:music="$emit('update:music', $event)"
+        v-for="song in newSongs"
+        :key="song.id"
+        :item="song"
+        :currentMusic="$attrs.currentMusic"
+        :paused="$attrs.paused"
+      />
     </ul>
   </section>
 </template>
