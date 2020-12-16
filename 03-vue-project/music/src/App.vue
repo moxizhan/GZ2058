@@ -45,4 +45,10 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
 }
+
+/* This changes all the animations globally */
+:root {
+  --animate-duration: 300ms;
+  /* --animate-delay: 0.9s; */
+}
 </style>
