@@ -1,5 +1,11 @@
 <template>
-  <li class="song-item" @click="$emit('update:music', item)">
+  <li
+    class="song-item"
+    @click="
+      $emit('update:music', { item, index });
+      $emit('update:playlist');
+    "
+  >
     <div class="info">
       <h5>{{ item.name }}</h5>
       <p>
@@ -25,7 +31,7 @@
 
 <script>
 export default {
-  props: ["item", "currentMusic", "paused"],
+  props: ["item", "index", "currentMusic", "paused"],
   // created() {
   //   console.log('$root',this.$root);
   //   console.log('$parent',this.$parent);

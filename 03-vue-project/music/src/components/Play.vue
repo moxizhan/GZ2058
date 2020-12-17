@@ -64,7 +64,7 @@ import PlayFullChart from "@/components/PlayFullChart.vue";
 import PlayFullLyric from "@/components/PlayFullLyric.vue";
 import PlayFullFooter from "@/components/PlayFullFooter.vue";
 export default {
-  props: ["currentMusic"],
+  props: ["currentMusic", "currentIndex", "playlist"],
   components: {
     PlayFullHeader,
     PlayFullChart,
@@ -104,10 +104,15 @@ export default {
     });
 
     audio.addEventListener("timeupdate", () => {
-      // console.log("当前播放到", this.currentTime);
+      console.log("当前播放到", this.currentTime);
       this.currentTime = audio.currentTime;
 
       this.drawCircle(this.currentTime, this.duration);
+    });
+
+    audio.addEventListener("ended", () => {
+      // 播放完成下一曲
+      this.playNext();
     });
   },
   // updated() {
@@ -147,6 +152,33 @@ export default {
       } else {
         audio.pause();
       }
+    },
+
+    calculateNext: function () {
+      // 根据当前播放模式 随机 单曲循环 顺序 顺序循环
+      let nextIndex;
+      if (this.currentIndex < this.playlist.length - 1) {
+        nextIndex = this.currentIndex + 1;
+      } else {
+        nextIndex = 0;
+      }
+
+      return nextIndex;
+    },
+    playNext: function () {
+      console.log("下一曲");
+      // 获取当前播放索引
+      // let currentIndex = this.playlist.findIndex(
+      //   (song) => this.currentMusic.id === song.id
+      // );
+      // console.log(currentIndex);
+
+      let index = this.calculateNext();
+
+      this.$emit("update:music", {
+        item: this.playlist[index],
+        index,
+      });
     },
   },
 

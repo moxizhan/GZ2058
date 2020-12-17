@@ -3,7 +3,11 @@
     <Play
       v-if="currentMusic"
       :currentMusic="currentMusic"
+      :playlist="playlist"
+      :currentIndex ="currentIndex"
       @update:paused="paused = $event"
+      @update:music="currentMusic = $event.item; currentIndex= $event.index"
+
     />
 
     <HomeNav v-if="$route.meta.isShowNav" />
@@ -14,7 +18,8 @@
     /> -->
 
     <router-view
-      @update:music="currentMusic = $event"
+      @update:music="currentMusic = $event.item; currentIndex= $event.index"
+      @update:playlist="playlist = $event"
       v-bind:currentMusic="currentMusic"
       v-bind:paused="paused"
     />
@@ -33,6 +38,8 @@ export default {
     return {
       currentMusic: null,
       paused: null,
+      playlist: [],
+      currentIndex: 0
     };
   },
 };

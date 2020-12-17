@@ -6,6 +6,7 @@
 
     <RecommendNewMusic
       @update:music="$emit('update:music', $event)"
+      @update:playlist="$emit('update:playlist', $event)"
       :newSongs="newSongs"
       :currentMusic="$attrs.currentMusic"
       :paused="$attrs.paused"

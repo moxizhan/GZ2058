@@ -5,9 +5,11 @@
     <ul>
       <SongItem
         @update:music="$emit('update:music', $event)"
-        v-for="song in newSongs"
+        @update:playlist="$emit('update:playlist', newSongs)"
+        v-for="(song,index) in newSongs"
         :key="song.id"
         :item="song"
+        :index="index"
         :currentMusic="$attrs.currentMusic"
         :paused="$attrs.paused"
       />
