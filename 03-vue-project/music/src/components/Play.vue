@@ -37,6 +37,8 @@
       leave-active-class="animate__animated animate__fadeOut"
     >
       <div class="play-full" v-if="!isShowPlayBar">
+        <div class="mask" :style="{backgroundImage: `url('${currentMusic.picUrl}')`}"></div>
+
         <PlayFullHeader @show-play-bar="isShowPlayBar = true" />
         <template>
           <PlayFullLyric
@@ -244,13 +246,31 @@ export default {
   }
 }
 .play-full {
-  background: rgba(255, 0, 0, 1);
+  background: linear-gradient(
+    to right,
+    rgb(56, 56, 56),
+    rgb(95, 95, 95),
+    rgb(56, 56, 56)
+  );
+
   width: 100vw;
   height: 100vh;
   position: fixed;
   top: 0;
   left: 0;
   z-index: 9;
+  .mask {
+    background: url("http://p1.music.126.net/fwXShM46KdIj3hB8_lJ71g==/109951165545588869.jpg");
+    background-size: cover;
+    background-position: center;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    filter: blur(30px) brightness(0.5);
+  }
 }
 
 @keyframes playing {
