@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+        <script src="https://unpkg.com/vuex@3.6.0/dist/vuex.js"></script>
+    </head>
+    <body>
+        <div id="vm" @click="clickHandler">{{name}} - {{count}}</div>
+        <div id="app">{{name}} - {{count}}</div>
+
+        <script>
+            // console.log(Vue, Vuex);
+            const store = new Vuex.Store({
+                // data
+                state: {
+                    count: 0,
+                },
+
+                // 唯一可以修改state的地方
+                // methods
+                mutations: {
+                    increment(state) {
+                        state.count++;
+                    },
+                },
+            });
+
+            // 唯一正确方法
+            // store.commit("increment");
+
+            // console.log(store.state);
+
+            // vue
+
+            var vm = new Vue({
+                el: "#vm",
+                data: {
+                    name: "vm",
+                },
+                computed: {
+                    count() {
+                        return store.state.count;
+                    },
+                },
+                methods: {
+                    clickHandler: function () {
+                        console.log("click");
+                        // ❌ store.state.count++
+                        //  你不能直接改变 store 中的状态。
+                        store.commit('increment')
+                    },
+                },
+            });
+
+            var app = new Vue({
+                el: "#app",
+                data: {
+                    name: "app",
+                },
+                computed: {
+                    count() {
+                        return store.state.count;
+                    },
+                },
+            });
+        </script>
+    </body>
+</html>
