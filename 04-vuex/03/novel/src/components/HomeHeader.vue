@@ -36,6 +36,21 @@
           size="22"
         /> </template
     ></van-nav-bar>
+    <div class="search">
+    <van-search
+      left-icon=""
+      right-icon="search"
+
+      placeholder="请输入搜索关键词"
+    />
+
+    <van-swipe class="my-swipe" vertical :autoplay="3000" :show-indicators="false" :loop="true">
+      <van-swipe-item>1</van-swipe-item>
+      <van-swipe-item>2</van-swipe-item>
+      <van-swipe-item>3</van-swipe-item>
+      <van-swipe-item>4</van-swipe-item>
+    </van-swipe>
+    </div>
   </div>
 </template>
 
@@ -50,6 +65,7 @@ export default {
 
 <style lang="less">
 .home-header {
+  border-bottom: 1px solid red;
   .van-nav-bar {
     background: #b83320;
 
@@ -72,5 +88,24 @@ export default {
       }
     }
   }
+
+  .search {
+      position: relative;
+      margin: 5px;
+  .van-search {
+    padding: 0;
+  }
+  .my-swipe {
+      width: 100%;
+      height: 34px;
+      line-height: 34px;
+      position: absolute;
+      top: 0;
+      left: 0;
+    //   z-index: -1;
+
+  }
+  }
+
 }
 </style>
