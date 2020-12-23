@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+        <script src="https://unpkg.com/vuex@2.0.0"></script>
+    </head>
+    <body>
+        <div id="app">
+            {{a}}
+            <button @click="$store.commit('updateA')">mutations</button>
+            <button @click="$store.dispatch('asyncUpdateA')">actions</button>
+        </div>
+        <script>
+            const { mapState, mapGetters } = Vuex;
+            const store = new Vuex.Store({
+                // ...
+
+                state: {
+                    a: 1,
+                    b: 2,
+                    m: [1, 2, 3, 4, 5, 6, 7],
+                },
+                getters: {
+                    c: (state) => {
+                        return state.a + state.b;
+                    },
+                    d: () => store.getters.c + 10,
+
+                    // 没有缓存
+                    n: (state) => (num) => state.m.filter((e) => e < num),
+                },
+                mutations: {
+                    // updateA: function (state) {
+                    //     // 不能有异步
+                    //     setTimeout(() => {
+                    //         state.a++;
+                    //     }, 5000);
+                    // },
+                    updateA: function (state) {
+                        state.a++;
+                    },
+                },
+                // actions: {
+                //     asyncUpdateA: function (context) {
+                //         setTimeout(() => {
+                //             context.commit("updateA");
+                //         }, 5000);
+                //     },
+                // },
+
+                actions: {
+                    asyncUpdateA: function ({ commit }) {
+                        setTimeout(() => {
+                            commit("updateA");
+                        }, 5000);
+                    },
+                },
+            });
+
+            console.log(store.getters.c, store.getters.d);
+
+            new Vue({
+                el: "#app",
+                store,
+                computed: {
+                    ...mapState(["a", "b", "m"]),
+                    ...mapGetters(["c", "d", "n"]),
+                },
+            });
+
+            // 应用层级的状态应该集中到单个 store 对象中。
+
+            // 提交 mutation 是更改状态的唯一方法，并且这个过程是同步的。
+
+            // 异步逻辑都应该封装到 action 里面。
+        </script>
+    </body>
+</html>
