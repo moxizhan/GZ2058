@@ -18,10 +18,16 @@
 
     <HomeList v-if="maleHot" :booklists="maleHot">男生热门</HomeList>
     <HomeList v-if="maleFinish" :booklists="maleFinish">男生完本</HomeList>
+
+
+    <router-link to="/category">分类</router-link>
+    <router-link to="/ranking">排行</router-link>
   </div>
 </template>
 
 <script>
+
+import { mapState } from 'vuex'
 // @ is an alias to /src
 // import HelloWorld from '@/components/HelloWorld.vue'
 import HomeHeader from "@/components/HomeHeader.vue";
@@ -39,21 +45,20 @@ export default {
       gender: "male",
       bannerMale: [],
       bannerFemale: [],
-      category: null,
       maleHot: null,
       maleFinish: null,
     };
   },
-  computed: {},
+  computed: {
+    ...mapState(['rankCategory'])
+  },
   created() {
     this.axios.get("/banner.json").then((response) => {
       this.bannerMale = response.data.male;
       this.bannerFemale = response.data.female;
     });
 
-    this.axios.get("http://novel.kele8.cn/rank-category").then((response) => {
-      this.category = response.data;
-    });
+
 
     this.axios
       .get("http://novel.kele8.cn/rank/54d42d92321052167dfb75e3")
