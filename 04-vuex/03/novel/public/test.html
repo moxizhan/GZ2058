@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <body>
+        <script>
+            var a = 1;
+            var arr = [1, 2, 3];
+
+            // console.log(arr[Math.floor(Math.random() * arr.length)]);
+            // function xxx() {
+            //     var n = arr[Math.floor(Math.random() * arr.length)];
+            //     if (n === a) {
+            //         return xxx();
+            //     } else {
+            //         return n;
+            //     }
+            // }
+            // var next = xxx();
+
+            var next;
+
+            function yyy() {
+                var n;
+                do {
+                    n = arr[Math.floor(Math.random() * arr.length)];
+                } while (n === a);
+                return n
+            }
+        </script>
+    </body>
+</html>
