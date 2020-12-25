@@ -1,5 +1,5 @@
 <template>
-  <li class="list-item">
+  <li class="list-item" @click="$router.push('/book/' + book._id)">
     <van-card
       :lazy-load="true"
       :thumb="`http://statics.zhuishushenqi.com${book.cover}`"

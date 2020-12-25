@@ -20,7 +20,7 @@
         v-show="isShowPlayBar"
         @click="isShowPlayBar = false"
       >
-        <img :src="currentMusic.picUrl" alt="" />
+        <img :src="`${currentMusic.picUrl}?imageView=1&type=webp&thumbnail=369x0`" alt="" />
         <h5>
           {{ currentMusic.name }}
         </h5>

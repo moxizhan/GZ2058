@@ -1,5 +1,5 @@
 <template>
-  <div class="ranking" v-if="ranking">
+  <div class="ranking">
     <ul class="tabbar">
       <li
         :class="{ active: type == 'epub' }"
@@ -31,7 +31,15 @@
       </van-sidebar>
 
       <ul class="right">
-        <ListItem v-for="book in ranking.books" :key="book._id" :book="book" />
+        <van-skeleton title avatar :row="3" :loading="loading">
+          <template v-if="ranking">
+            <ListItem
+              v-for="book in ranking.books"
+              :key="book._id"
+              :book="book"
+            /> </template
+          >
+        </van-skeleton>
       </ul>
     </div>
   </div>
@@ -46,6 +54,7 @@ export default {
   },
   data() {
     return {
+      loading: false,
       type: "male",
       activeKey: 0,
       ranking: null,
@@ -57,6 +66,7 @@ export default {
 
   methods: {
     getRanking: function (id) {
+      this.loading = true;
       this.axios.get("http://novel.kele8.cn/rank/" + id).then((response) => {
         // console.log(response.data.ranking);
 
@@ -64,6 +74,8 @@ export default {
         this.ranking = response.data.ranking;
         // console.log(this[id]);
         // response.data.ranking
+
+        this.loading = false;
       });
     },
     getLists: function () {

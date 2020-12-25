@@ -5,11 +5,15 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    rankCategory: null
+    rankCategory: null,
+    chapter: null
   },
   mutations: {
     updateRankCategory: function (state,payload) {
       state.rankCategory = payload
+    },
+    updateChapter: function (state,payload) {
+      state.chapter = payload
     }
   },
   actions: {
