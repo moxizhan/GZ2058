@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+
+        <script src="https://unpkg.com/react@17/umd/react.production.min.js"></script>
+        <script src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js"></script>
+        <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    </head>
+    <body>
+        <!-- 每个 JSX 元素只是调用 React.createElement(component, props, ...children) 的语法糖。 -->
+
+        <div id="app"></div>
+
+        <!-- 你可以在任何 <script> 标签内使用 JSX，方法是在为其添加 type="text/babel" 属性。 -->
+        <script type="text/babel">
+            // let re = React.createElement("h3", { class: "test" }, "hello");
+
+            // 使用JSX 原生js 不认识 jsx 语法 需要bebal转码
+            // let re = '<h1>Hello, world!</h1>';
+            // let re = <h1>Hello, world!</h1>;
+
+            // JSX 可以生成 React “元素”
+            // 我们建议将内容包裹在括号中，虽然这样做不是强制要求的，但是这可以避免遇到自动插入分号陷阱。
+
+            // let re = (
+            //     <li class="card">
+            //         <div class="thumb">
+            //             <img
+            //                 src="http://p1.music.126.net/9F0KGqwgEOnaKFQRiZbMrw==/109951165581808889.jpg?imageView=1&type=webp&thumbnail=369x0"
+            //                 alt=""
+            //             />
+            //             <span>100</span>
+            //         </div>
+            //         <h3>[华语速爆新歌] 薛之谦失意单曲，放任回忆空对执着</h3>
+            //     </li>
+            // );
+
+            let name = "nick";
+            let user = {
+                firstName: "nick",
+                lastName: "Bob",
+            };
+            let formatName = (user) => user.firstName + " " + user.lastName;
+
+            // 大括号内放置任何有效的 JavaScript 表达式。例如，2 + 2，user.firstName 或 formatName(user) 都是有效的 JavaScript 表达式。
+            // let re = <p>hello, {name}</p>;
+            // let re = <p>hello, {name + " mark"}</p>;
+            // let re = <p>hello, {user.firstName}</p>;
+            // let re = <p>hello, {formatName(user)}</p>;
+
+            // JSX 也是一个表达式
+            // let getGreeting = (u) => {
+            //     if (u) {
+            //         return <p>欢迎回来, {u}</p>;
+            //     }
+            //     return <p>访客你好</p>;
+            // };
+
+            let getGreeting = (u) =>
+                u ? <p>欢迎回来, {u}</p> : <p>访客你好</p>;
+
+            // 一个jsx => 变成一个react 元素  有且只能由一个根元素
+            // JSX elements must be wrapped in an enclosing tag
+            let re = (
+                <div>
+                    <h3 title={Date.now()}>JSX 特定属性</h3>
+                    {getGreeting("nick")}
+                    {getGreeting()}
+                </div>
+            );
+
+            // 使用className 替换 class
+            // let re = <div className={name}>元素class</div>;
+
+            ReactDOM.render(re, document.querySelector("#app"));
+        </script>
+    </body>
+</html>

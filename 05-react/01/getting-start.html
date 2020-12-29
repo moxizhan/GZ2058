@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <body>
+        <h1>hello</h1>
+        <div id="app"></div>
+
+        <script src="https://unpkg.com/react@17/umd/react.production.min.js"></script>
+        <script src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js"></script>
+        <script>
+            let e = document.querySelector("#app");
+
+            // 创建react元素
+            // React.createElement(type,[props],[...children])
+            // let re = React.createElement("div");
+            // let re = React.createElement(
+            //     "div",
+            //     { title: "hello world" },
+            //     React.createElement("p", null, "第一个段落"),
+            //     React.createElement(
+            //         "p",
+            //         null,
+            //         React.createElement("span", null, "span")
+            //     )
+            // );
+
+            let re = React.createElement(
+                "li",
+                { class: "card" },
+                React.createElement(
+                    "div",
+                    { class: "thumb" },
+                    React.createElement("img", {
+                        src:
+                            "http://p1.music.126.net/9F0KGqwgEOnaKFQRiZbMrw==/109951165581808889.jpg?imageView=1&type=webp&thumbnail=369x0",
+                    }),
+                    React.createElement("span", null, "100")
+                ),
+                React.createElement(
+                    "h3",
+                    null,
+                    "[华语速爆新歌]  薛之谦失意单曲，放任回忆空对执着"
+                )
+            );
+
+            // 将react元素渲染到dom
+            // ReactDOM.render(react元素, DOM节点)
+
+            ReactDOM.render(re, e);
+        </script>
+
+        <!-- 
+Children: {map: ƒ, forEach: ƒ, count: ƒ, toArray: ƒ, only: ƒ}
+Component: ƒ v(a,b,e)
+Fragment: Symbol(react.fragment)
+Profiler: Symbol(react.profiler)
+PureComponent: ƒ K(a,b,e)
+StrictMode: Symbol(react.strict_mode)
+Suspense: Symbol(react.suspense)
+cloneElement: ƒ (a,b,c)
+createContext: ƒ (a,b)
+createElement: ƒ ca(a,b,e)
+createFactory: ƒ (a)
+createRef: ƒ ()
+forwardRef: ƒ (a)
+isValidElement: ƒ M(a)
+lazy: ƒ (a)
+memo: ƒ (a,b)
+useCallback: ƒ (a,b)
+useContext: ƒ (a,b)
+useDebugValue: ƒ (a, b)
+useEffect: ƒ (a,b)
+useImperativeHandle: ƒ (a,b,c)
+useLayoutEffect: ƒ (a,b)
+useMemo: ƒ (a,b)
+useReducer: ƒ (a,b,c)
+useRef: ƒ (a)
+useState: ƒ (a)
+version: "17.0.1"
+
+createPortal: ƒ hi(a,b)
+findDOMNode: ƒ (a)
+flushSync: ƒ (a,b)
+hydrate: ƒ (a,b,c)
+render: ƒ (a,b,c)
+unmountComponentAtNode: ƒ (a)
+unstable_batchedUpdates: ƒ ai(a,b)
+unstable_createPortal: ƒ (a,b)
+unstable_renderSubtreeIntoContainer: ƒ (a,b,c,d)
+version: "17.0.1" 
+
+-->
+    </body>
+</html>
