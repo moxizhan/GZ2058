@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+
+        <script src="https://unpkg.com/react@17/umd/react.production.min.js"></script>
+        <script src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js"></script>
+        <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    </head>
+    <body>
+        <div id="app"></div>
+
+        <!-- <script type="text/babel">
+            // 函数组件
+            // function Welcome() {
+            //     return <h1>Hello, nick</h1>;
+            // }
+
+            // class 组件
+            class Welcome extends React.Component {
+                // jsx
+                render() {
+                    return <h1>Hello, nick</h1>;
+                }
+            }
+
+            ReactDOM.render(<Welcome />, document.querySelector("#app"));
+        </script> -->
+
+        <!-- <script type="text/babel">
+            // 函数组件
+            function Welcome(props) {
+                return <h1>Hello, {props.name}</h1>;
+            }
+
+            // function App(props) {
+            //     return (
+            //         <div className="app">
+            //             <Welcome name="marry" />
+            //             <Welcome name="nick" />
+            //             <Welcome name="nicholas" />
+            //             {/* 使用组件时  所有属性 都会挂载到 组件的 props 对象上 */}
+            //         </div>
+            //     );
+            // }
+
+            function App(props) {
+                return (
+                    <div className="app">
+                        <Welcome name={props.friends[0]} />
+                        <Welcome name={props.friends[1]} />
+                        <Welcome name={props.friends[2]} />
+                        {/* 使用组件时  所有属性 都会挂载到 组件的 props 对象上 */}
+                    </div>
+                );
+            }
+
+            // 组件内所有的值 都是通过 组件调用时用属性传入的 => 无状态组件
+
+            ReactDOM.render(
+                <App friends={[11, 22, 33]} />,
+                document.querySelector("#app")
+            );
+        </script> -->
+
+        <!-- <script type="text/babel">
+            // class 组件
+            class Welcome extends React.Component {
+                render() {
+                    return <h1>Hello, {this.props.name}</h1>;
+                    // class 组件 调用 props 需要 this
+                }
+            }
+
+            ReactDOM.render(
+                <Welcome name="nick" />,
+                document.querySelector("#app")
+            );
+        </script> -->
+
+        <script type="text/babel">
+            // class 组件
+            class Welcome extends React.Component {
+                render() {
+                    return <h1>Hello, {this.props.name}</h1>;
+                    // class 组件 调用 props 需要 this
+                }
+            }
+            // 当前写法 也是无状态组件
+
+            function App(props) {
+                return (
+                    <div className="app">
+                        <Welcome name="nick" />
+                        <Welcome name="marry" />
+                    </div>
+                );
+            }
+
+            ReactDOM.render(<App />, document.querySelector("#app"));
+        </script>
+
+        <!-- 无状态组件  函数式 class 写法 没有太大区别  class用this -->
+
+        <!-- 所有 React 组件都必须像纯函数一样保护它们的 props 不被更改。 -->
+
+        <script>
+            function xxx() {
+                console.log(this);
+            }
+
+            xxx();
+
+            var o = { a: 1 };
+            o.xxx = xxx;
+
+            o.xxx();
+
+            var x = o.xxx;
+            x();
+            window.x();
+            // this指向 函数运行时所挂载的对象
+        </script>
+    </body>
+</html>

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+
+        <script src="https://unpkg.com/react@17/umd/react.production.min.js"></script>
+        <script src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js"></script>
+        <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    </head>
+    <body>
+        <div id="app"></div>
+
+        <!-- <script type="text/babel">
+            function Clock(props) {
+                return <div>time: {props.t}</div>;
+            }
+
+
+            // 理想情况下，我们希望只编写一次代码，便可以让 Clock 组件自我更新：
+            // ReactDOM.render 只有一次
+            setInterval(() => {
+                ReactDOM.render(
+                    <Clock t={Date.now()} />,
+                    document.querySelector("#app")
+                );
+            }, 1000);
+
+            // 我们需要在 Clock 组件中添加 “state” 来实现这个功能。
+            // State 与 props 类似，但是 state 是私有的，并且完全受控于当前组件。
+        </script> -->
+
+        <script type="text/babel">
+            // 暂时 函数式组件 不能写 state 有状态组件
+
+            // 无状态组件 => 有状态组件
+            // 1 先把组件 改写为 class组件
+            // class Clock extends React.Component {
+            //     render() {
+            //         return <div>{this.props.p} | time: </div>;
+            //     }
+            // }
+
+            // 2 向 class 组件中添加局部的 state
+            class Clock extends React.Component {
+                // 2-1 添加 构造器
+                constructor(props) {
+                    super(props);
+                    // Class 组件应该始终使用 props 参数来调用父类的构造函数
+                    // 2-2 添加 子类私有属性
+                    this.state = { t: Date.now(), msg: "hello State" };
+                    // 构造函数是唯一可以给 this.state 赋值的地方
+                }
+
+                // 组件挂载完成  vue mounted
+                componentDidMount() {
+                    console.log(this);
+                    console.log(this.props, this.state);
+                    setInterval(() => {
+                        // ❌ 不能直接给 state 赋值
+                        // this.state.t = Date.now()
+                        // console.log(this.state);
+
+                        // this.setState(newState)
+                        // newState 确保 newState 一定是全新的
+
+                        this.setState({
+                            t: Date.now(),
+                        });
+
+                        // 1. 不能直接给 state 赋值 应该使用 setState()
+                        // 2. State 的更新可能是异步的 新状态依赖旧状态 newState就是函数
+                        // 这里的合并是浅合并，所以 this.setState({t}) 完整保留了 this.state.msg  但是完全替换了 this.state.t
+                    }, 1000);
+                }
+
+                render() {
+                    return (
+                        <div>
+                            {this.props.p} | time: {this.state.t}{" "}
+                        </div>
+                    );
+                }
+            }
+
+            ReactDOM.render(
+                <div>
+                    <Clock p="1" />
+                    <Clock p="2" />
+                    <Clock p="3" />
+                </div>,
+                document.querySelector("#app")
+            );
+        </script>
+    </body>
+</html>
