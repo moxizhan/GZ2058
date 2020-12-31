@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+
+        <script src="https://unpkg.com/react@17/umd/react.production.min.js"></script>
+        <script src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js"></script>
+        <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    </head>
+    <body>
+        <div id="app"></div>
+
+        <script type="text/babel">
+            // function Count(props) {
+            //     function clickHandler() {
+            //         console.log("click");
+            //     }
+
+            //     return <p onClick={clickHandler}>you clicked times</p>;
+            // }
+
+            // 不使用事件处理函数
+            // function Count(props) {
+            //     // ❌ onClick={console.log('123')}
+            //     // onClick={()=>{console.log('123')}}
+            //     return (
+            //         <a
+            //             href="http://www.baidu.com"
+            //             onClick={() => console.log("123")}
+            //         >
+            //             you clicked times
+            //         </a>
+            //     );
+            // }
+
+            // 阻止默认事件
+            // function Count(props) {
+            //     function clickHandler(e) {
+            //         console.log("click", e);
+            //         e.preventDefault();
+            //         // e 是一个合成事件
+
+            //     }
+            //     return (
+            //         <a href="http://www.baidu.com" onClick={clickHandler}>
+            //             you clicked times
+            //         </a>
+            //     );
+            // }
+
+            class Count extends React.Component {
+                constructor(props) {
+                    super(props);
+                    this.state = { n: 0 };
+
+                    // 为了在回调中使用 `this`，这个绑定是必不可少的
+                    this.clickHandler = this.clickHandler.bind(this);
+                }
+
+                clickHandler() {
+                    console.log(123, this);
+                    // this.setState({n: this.state.n + 1});
+
+                    // 如果依赖原来的值 需要使用 回调函数 箭头函数 {} 问题
+                    // this.setState((state) => ({ n: state.n + 1 }));
+                    this.setState((state) => {
+                        return { n: state.n + 1 };
+                    });
+                }
+
+                render() {
+                    // class 组件 调用事件 必须使用 this
+                    return (
+                        <p onClick={this.clickHandler}>
+                            you clicked {this.state.n} times
+                        </p>
+                    );
+                }
+            }
+
+            ReactDOM.render(<Count />, document.querySelector("#app"));
+        </script>
+    </body>
+</html>

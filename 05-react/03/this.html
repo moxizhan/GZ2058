@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <body>
+        <!-- <script>
+        function xxx() {
+            console.log(this);
+        }
+        // xxx();
+        // window.xxx()
+
+        var o = { a: 1 };
+        o.x = xxx;
+        // o.x();
+
+        var x = o.x;
+        // x();
+        // window.x();
+        // this指向 函数运行时所挂载的对象
+
+        let y = o.x
+    </script> -->
+
+        <!-- <script>
+            var o = {
+                x: 5,
+                y: function () {
+                    console.log(this);
+                },
+            };
+
+            // o.y();
+
+            // var y = o.y;
+            // y()
+
+            var p = {
+                x: 10,
+            };
+
+            // p.y = o.y
+            // p.y()
+
+            o.y.call(p)
+            // 把某个方法临时借用到 某个对象
+
+            // ??? 类数组转为数组 
+            // Array.prototype.slice.call(类数组)
+        </script> -->
+
+        <script>
+            function xxx() {
+                console.log(this);
+            }
+            var o = { a: 5 };
+
+            var p = xxx.bind(o);
+
+            var z = { b: 10 };
+
+            z.xxx = xxx;
+            z.ppp = p;
+
+            z.xxx()
+            z.ppp()
+        </script>
+    </body>
+</html>

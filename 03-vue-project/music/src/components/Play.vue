@@ -90,6 +90,8 @@ export default {
     console.log("mounted", this.$refs.audio);
     // console.log(this.$refs.usernameInput);
     let audio = this.$refs.audio;
+
+    // 绑定事件 实际可以不适用 ref   audio 使用ref 主要是为了 获取元素 属性
     audio.addEventListener("pause", () => {
       console.log("暂停");
       this.paused = true;

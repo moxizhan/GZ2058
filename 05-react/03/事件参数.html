@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+
+        <script src="https://unpkg.com/react@17/umd/react.production.min.js"></script>
+        <script src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js"></script>
+        <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    </head>
+    <body>
+        <div id="app"></div>
+
+        <script type="text/babel">
+            // function Toggle(props) {
+            //     function clickHandler(e, n) {
+            //         console.log(e, n, props);
+            //     }
+
+            //     // 只需要事件对象
+            //     return <button onClick={clickHandler}>btn</button>;
+            //     // 只需要参数
+            //     // return <button onClick={() => clickHandler(1)}>btn</button>;
+
+            //     // 参数 和事件对象都需要
+            //     // return <button onClick={(e) => clickHandler(e, 1)}>btn</button>;
+            // }
+
+            class Toggle extends React.Component {
+                constructor(props) {
+                    super(props);
+
+                    // this.clickHandler = this.clickHandler.bind(this)
+                }
+
+                clickHandler(n, e) {
+                    console.log(this, n, e);
+                }
+                render() {
+                    return (
+                        <button onClick={(e) => this.clickHandler(10, e)}>
+                            btn
+                        </button>
+                    );
+
+                    // return (
+                    //     <button onClick={this.clickHandler.bind(this, 5)}>
+                    //         btn
+                    //     </button>
+                    // );
+                }
+            }
+
+            ReactDOM.render(<Toggle />, document.querySelector("#app"));
+        </script>
+    </body>
+</html>
