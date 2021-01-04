@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <script src="https://unpkg.com/react@17/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+</head>
+
+<body>
+    <div id="app"></div>
+
+    <script type="text/babel">
+
+        function UserGreeting(props) {
+            return <div>hello user</div>
+        }
+        function CustomGreeting(props) {
+            return <div>hello custom</div>
+        }
+
+        function Greeting(props) {
+            if (props.isLogin) {
+                return <UserGreeting />
+            }
+            return <CustomGreeting />
+        }
+
+        // ReactDOM.render(<Greeting isLogin={true} />, document.querySelector("#app"));
+
+
+
+
+        function LoginButton(props) {
+            return (
+                <button onClick={props.xxx}>
+                    Login
+                </button>
+            );
+        }
+
+        function LogoutButton(props) {
+            // return (
+            //     <button onClick={()=> window.console.log('123')}>
+            //         Logout
+            //     </button>
+            // );
+            // function clickHandler() {
+            //     console.log(123)
+            // }
+            // return (
+            //     <button onClick={clickHandler}>
+            //         Logout
+            //     </button>
+            // );
+            return (
+                <button onClick={props.xxx}>
+                    Logout
+                </button>
+            );
+        }
+
+
+        // function Warnning(props) {
+        //     return <h3 title="123" style={{ color: 'red' }} >⚠ 警告:{props.warn}</h3>
+        // }
+
+
+        class Warnning extends React.Component {
+            constructor(props) {
+                super(props)
+            }
+
+            componentDidMount() {
+                console.log('componentDidMount');
+            }
+            
+            
+            render() {
+                if (this.props.warn) {
+                    return <h3 title="123" style={{ color: 'red' }} >⚠ 警告:{this.props.warn}</h3>
+                } else {
+                    return null
+                }
+            }
+        }
+        class LoginControl extends React.Component {
+            constructor(props) {
+                super(props)
+
+                this.state = {
+                    isLogin: true,
+                    // warn: '12345'
+                    warn: ''
+
+                }
+            }
+
+            // render() {
+            //     let button
+            //     if (this.state.isLogin) {
+            //         button = <LogoutButton />
+            //     }else {
+            //         button = <LoginButton />
+            //     }
+            //     return (
+            //         <div>
+            //             {button}
+            //         </div>
+            //     )
+            // }
+
+            preventClick = () => {
+                this.setState({ isLogin: false })
+            }
+
+            render() {
+                let isLogin = this.state.isLogin
+                const count = 1
+                return (
+                    <div>
+                        <button onClick={this.preventClick}>prevent</button>
+                        <hr />
+                        {
+                            isLogin
+                                ?
+                                <LogoutButton xxx={this.preventClick} />
+                                :
+                                <LoginButton xxx={() => this.setState({ isLogin: true })} />
+                        }
+                        <Greeting isLogin={isLogin} />
+                        <hr />
+                        <p>
+                            {count !== 0 && <h1>Messages: {count}</h1>}
+                        </p>
+
+                        <hr />
+
+                        {/* <Warnning /> */}
+
+                        {/* <Warnning warn={this.state.warn} /> */}
+                        {/* this.state.warn && <Warnning warn={this.state.warn} /> */}
+
+                        <Warnning warn={this.state.warn} />
+                    </div>
+                )
+            }
+        }
+
+
+
+        ReactDOM.render(<LoginControl />, document.querySelector("#app"));
+
+
+
+    </script>
+</body>
+
+</html>

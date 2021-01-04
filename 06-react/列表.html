@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <script src="https://unpkg.com/react@17/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+</head>
+
+<body>
+    <div id="app"></div>
+
+    <script type="text/babel">
+
+        var arr = [1, 2, 3, 4, 5]
+        var arr2 = arr.map((n) => n * 2)
+        var arr3 = arr.map(n => <h3>{n}</h3>)
+
+
+        // 错误
+        // arr.forEach(function (n) {
+        //     n = n * 2
+        // });
+
+
+        function Li(props) {
+            return <li>{props.n * 2}</li>
+        }
+        function Test(props) {
+            // return <div>{arr3}</div>
+            // return <ul>{arr.map(n => <li>{n * 10}</li>)}</ul>
+            // return <ul>{arr.map(n => <Li key={n} n={n} />)}</ul>
+            return <ul>{arr.map(n => <Li n={n} />)}</ul>
+
+        }
+
+        ReactDOM.render(<Test />, document.querySelector("#app"));
+
+
+
+    </script>
+</body>
+
+</html>
