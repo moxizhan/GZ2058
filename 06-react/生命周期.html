@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <script src="https://unpkg.com/react@17/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+</head>
+
+<body>
+    <div id="app"></div>
+
+    <script type="text/babel">
+
+        class Greeting extends React.Component {
+            // *********************************** // 
+            constructor(props) {
+                console.log('constructor');
+
+                super(props)
+                this.state = {
+                    time: Date.now()
+                }
+                // 定义初始状态  bind this
+            }
+
+            UNSAFE_componentWillMount() {
+                console.log('UNSAFE_componentWillMount');
+            }
+
+            // *********************************** // 
+            render() {
+                console.log('render');
+
+                // 确保纯函数 只是定义 jsx 不要写交互逻辑
+                return <h1>Hello {this.props.count} {this.state.time}</h1>
+            }
+
+
+            // *********************************** // 
+            // 组件挂载完成
+            componentDidMount() {
+                console.log('componentDidMount');
+                // 可以使用 DOM，运行副作用，安排更新。
+
+                this.id = setInterval(() => {
+                    this.setState({ time: Date.now() })
+                    console.log('x');
+                }, 1000);
+            }
+
+
+
+
+            // 即将接受新props参数
+            UNSAFE_componentWillReceiveProps(nextProps, nextState) {
+                console.log('UNSAFE_componentWillReceiveProps', nextProps, nextState);
+            }
+
+            // 创建上一次的快照 返回值作为参数 传递给 componentDidUpdate
+            getSnapshotBeforeUpdate(prevProps, prevState) {
+                return 100
+            }
+
+
+
+            // *********************************** // 
+            // 组件是否需要更新 根据返回值决定 是否更新组件
+            // shouldComponentUpdate(nextProps, nextState) {
+            //     console.log(nextProps, nextState);
+            //     // return false
+            //     // if (nextProps.count % 2) {
+            //     //     return true
+            //     // } else {
+            //     //     return false
+            //     // }
+
+
+            //     // 只有count变化 会引起试图更新  
+            //     if (nextProps.count !== this.props.count) {
+            //         return true
+            //     } else {
+            //         return false
+            //     }
+            // }
+
+            // 即将更新
+            UNSAFE_componentWillUpdate(nextProps, nextState) {
+                // 读取新props 状态
+                console.log('UNSAFE_componentWillUpdate', nextProps, nextState);
+            }
+
+
+            // ***********************************
+            // 组件更新完成
+            componentDidUpdate(prevProps, prevState, snapshot) {
+                console.log('componentDidUpdate', snapshot);
+            }
+
+
+
+            // ***********************************
+            componentWillUnmount() {
+                // 取消订阅 定时器 ajax请求
+                console.log('componentWillUnmount', this.id);
+
+                clearInterval(this.id)
+            }
+
+
+
+
+        }
+
+        class App extends React.Component {
+            constructor(props) {
+                super(props)
+                this.state = {
+                    show: true,
+                    count: 0,
+                    xxx: 123
+                }
+            }
+
+            clickHandler = () => {
+                this.setState((state) => ({ show: !state.show }))
+            }
+            increment = () => {
+                this.setState((state) => ({ count: state.count + 1 }))
+            }
+            xxx = () => {
+                this.setState((state) => ({ xxx: state.xxx + 1 }))
+            }
+            render() {
+                return (
+                    <div>
+                        <button onClick={this.clickHandler}>Toggle</button>
+                        <button onClick={this.increment}>increment</button>
+                        <button onClick={this.xxx}>xxx</button>
+                        {this.state.show && <Greeting count={this.state.count} xxx={this.state.xxx} />}
+                    </div>
+                )
+            }
+        }
+
+
+
+        ReactDOM.render(<App />, document.querySelector("#app"));
+
+
+
+    </script>
+</body>
+
+</html>
