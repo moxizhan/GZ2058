@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <script src="https://unpkg.com/react@17/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+</head>
+
+<body>
+    <div id="app"></div>
+
+    <!-- <script type="text/babel">
+
+        function Title(props) {
+            return <div>Title组件</div>
+        }
+
+        function FancyTitle(props) {
+            return (
+                <div className="FancyTitle">
+                    <h1>{props.children}</h1>
+                    <p>{props.xxx}</p>
+                </div>
+            )
+        }
+
+        function App(props) {
+            return (
+                <div className="app">
+                    {/* <FancyTitle xxx='xxx属性'>我是标题</FancyTitle> */}
+
+                    {/* <FancyTitle xxx='xxx属性'>
+                        <li>我是li标题</li>
+                    </FancyTitle> */}
+
+                    <FancyTitle xxx='xxx属性'>
+                        <FancyTitle />
+                    </FancyTitle>
+
+                    {/* 自定义组件名 中间的部分 标签内部 内容 会当成 props.children 传递到子组件 */}
+                </div>
+            )
+        }
+
+
+
+        ReactDOM.render(<App />, document.querySelector("#app"));
+
+
+
+    </script> -->
+
+
+    <script type="text/babel">
+
+
+        function FancyCard(props) {
+            return (
+                <div className="FancyCard">
+                    <div className="left">{props.left}</div>
+                    <div className="main">{props.children}</div>
+                    <div className="right">{props.right}</div>
+                </div>
+            )
+        }
+
+        function Test(props) {
+            return <mark>test</mark>
+        }
+
+        function App(props) {
+            return (
+                <div className="app">
+                    <FancyCard left={<h1>left</h1>} right={<Test />}>xxx</FancyCard>
+                </div>
+            )
+        }
+
+
+
+        ReactDOM.render(<App />, document.querySelector("#app"));
+
+
+
+    </script>
+</body>
+
+</html>

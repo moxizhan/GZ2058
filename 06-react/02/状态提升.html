@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <script src="https://unpkg.com/react@17/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+</head>
+
+<body>
+    <div id="app"></div>
+
+    <script type="text/babel">
+
+        class App extends React.Component {
+            constructor(props) {
+                super(props)
+
+                this.state = { age: 16 }
+            }
+
+            changeAge = (n) => {
+                // this.setState({age: })
+                console.log('changeAge', n);
+                this.setState({
+                    age: n
+                })
+            }
+
+            render() {
+                return (
+                    <div>
+                        <AgeInput changeAge={this.changeAge} age={this.state.age} />
+                        <IsAdult age={this.state.age} />
+                    </div>
+                )
+            }
+        }
+
+        function AgeInput(props) {
+
+            function changeHandle(e) {
+                console.log('changeHandle');
+                props.changeAge(e.target.value)
+            }
+            return <input type="number" placeholder="请输入年龄" value={props.age} onChange={changeHandle} />
+
+        }
+        function IsAdult(props) {
+            return <h3>{props.age > 18 ? '已经成年' : '还未成年'}</h3>
+
+        }
+
+
+
+        ReactDOM.render(<App />, document.querySelector("#app"));
+
+
+
+    </script>
+</body>
+
+</html>

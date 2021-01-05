@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <script src="https://unpkg.com/react@17/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+</head>
+
+<body>
+    <div id="app"></div>
+
+    <script type="text/babel">
+
+        class Form extends React.Component {
+            constructor(props) {
+                super(props)
+
+                this.state = {
+                    value: '罗志祥',
+                    select: ['lime']
+                }
+            }
+
+            changeHandle = (e) => {
+                // console.log(e, e.target, e.target.value);
+                this.setState({ value: e.target.value })
+            }
+
+            xxx = (e) => {
+                console.log(e.target.value);
+                this.setState(function (state) {
+                    const o = new Set(state.select)
+
+                    if (o.has(e.target.value)) {
+                        o.delete(e.target.value)
+                    } else {
+                        o.add(e.target.value)
+                    }
+
+                    return {
+                        // select: [...state.select, e.target.value]
+                        select: [...o]
+
+                    }
+                })
+
+                // this.setState(function (state) {
+                //     return {
+                //         select: [...new Set([...state.select, e.target.value])]
+                //     }
+                // })
+            }
+            render() {
+                return (
+                    <form action="#" method="get">
+                        <input type="text" name="xxx" value={this.state.value} onChange={this.changeHandle} />
+                        <hr />
+                        <textarea name="" id="" cols="30" rows="10" value={this.state.value}></textarea>
+                        <hr />
+                        {
+                            /* <select multiple={true} value={this.state.select} onChange={(e) => this.setState({ select: e.target.value })}>
+                            <option value="grapefruit">葡萄柚</option>
+                            <option value="lime">酸橙</option>
+                            <option selected value="coconut">椰子</option>
+                            <option value="mango">芒果</option>
+                        </select> */
+                        }
+
+                        <select multiple={true} value={this.state.select} onChange={this.xxx}>
+                            <option value="grapefruit">葡萄柚</option>
+                            <option value="lime">酸橙</option>
+                            <option selected value="coconut">椰子</option>
+                            <option value="mango">芒果</option>
+                        </select>
+                        <input type="submit" />
+                    </form>
+                )
+            }
+        }
+
+
+
+        ReactDOM.render(<Form />, document.querySelector("#app"));
+
+
+
+    </script>
+</body>
+
+</html>
