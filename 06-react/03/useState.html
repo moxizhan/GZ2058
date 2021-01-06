@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <script src="https://unpkg.com/react@17/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+  </head>
+
+  <body>
+    <div id="app"></div>
+
+    <script type="text/babel">
+      const { Component, useState } = React;
+
+      //   function Counter(props) {
+      //     return <p>you clicked {} times</p>;
+      //   }
+
+      //   class Counter extends Component {
+      //     constructor(props) {
+      //       super(props);
+
+      //       this.state = {
+      //         count: 0,
+      //         msg: 'hello wrold'
+      //       };
+      //       this.clickHandler = this.clickHandler.bind(this);
+      //     }
+      //     clickHandler() {
+      //       this.setState((state) => ({ count: state.count + 1 }));
+      //     }
+      //     render() {
+      //       return (
+      //         <p onClick={this.clickHandler}>
+      //           you clicked {this.state.count} times
+      //         </p>
+      //       );
+      //     }
+      //   }
+
+      function Counter(props) {
+        // 声明一个叫 “count” 的 state 变量。
+        const [count, setCount] = useState(0);
+        const [msg, setMsg] = useState("hello world");
+        // useState 唯一的参数就是初始 state
+        // useState 会返回一对值：当前状态和一个让你更新它的函数
+        // setCount更改count 的方法 setCount(新状态)
+
+        // Hook 不能在 class 组件中使用
+
+        //   function clickHandler(e) {
+        //     // console.log(e);
+        //     setCount(count + 1);
+        //   }
+        return (
+          <p onClick={() => setCount(count + 1)}>
+            you clicked {count} times
+            <button
+              onClick={(e) => {
+                // console.log(e);
+                e.stopPropagation()
+                setMsg(Date.now());
+              }}
+            >
+              {msg}
+            </button>
+          </p>
+        );
+      }
+
+      function App(props) {
+        return (
+          <div>
+            <Counter />
+            <Counter />
+            <Counter />
+          </div>
+        );
+      }
+
+      ReactDOM.render(<App />, document.querySelector("#app"));
+    </script>
+  </body>
+</html>
