@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="content">
     Read {{ $route.params.id }}
 
     <h1>{{ content.title }}</h1>
