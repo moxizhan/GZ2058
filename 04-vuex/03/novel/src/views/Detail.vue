@@ -10,7 +10,16 @@
         :title="bookInfo.title"
         :thumb="`http://statics.zhuishushenqi.com${bookInfo.cover}`"
       />
-      <van-button type="default">加入书架</van-button>
+      <van-button
+        type="danger"
+        @click="removeBookrack($route.params.id)"
+        v-if="bookrack.find((id) => id == $route.params.id)"
+        >移除书架</van-button
+      >
+      <van-button type="default" @click="addBookrack($route.params.id)" v-else
+        >加入书架</van-button
+      >
+
       <van-button
         type="info"
         @click="$router.push(`/book/${$route.params.id}/read`)"
@@ -25,12 +34,33 @@
 </template>
 
 <script>
+import { mapState, mapMutations } from "vuex";
 export default {
   data() {
     return {
       bookInfo: null,
+      // bookrack: JSON.parse(window.localStorage.getItem("bookrack"))
     };
   },
+
+  computed: mapState(["bookrack"]),
+
+  methods: {
+    // pushBookrack(id) {
+    //   console.log(id);
+    //   // const bookrack = JSON.parse(window.localStorage.getItem("bookrack"));
+    //   if (this.bookrack) {
+    //     window.localStorage.setItem("bookrack", JSON.stringify([...this.bookrack, id]));
+    //   } else {
+    //     window.localStorage.setItem("bookrack", JSON.stringify([id]));
+    //   }
+
+    //   this.bookrack = JSON.parse(window.localStorage.getItem("bookrack"))
+    // },
+
+    ...mapMutations(["addBookrack", "removeBookrack"]),
+  },
+
   beforeRouteEnter(to, from, next) {
     // ...
     // setTimeout(() => {

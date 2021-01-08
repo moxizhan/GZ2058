@@ -5,7 +5,10 @@
 </template>
 
 <script>
-export default {};
+import { mapState, mapMutations } from "vuex";
+export default {
+  computed: mapState(["bookrack"]),
+};
 </script>
 
 <style>
