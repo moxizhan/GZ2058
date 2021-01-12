@@ -83,6 +83,7 @@ export default {
 
   beforeRouteLeave(to, from, next) {
     // ...
+    console.log(to.name);
 
     if (to.name == "Read" || to.name == "Chapter") {
       console.log("获取章节");
