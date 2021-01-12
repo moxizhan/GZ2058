@@ -1,6 +1,6 @@
-import Find from "../components/Find.jsx";
-import Cate from "../components/Cate.jsx";
-import Me from "../components/Me.jsx";
+import Find from "../views/Find.jsx";
+import Cate from "../views/Cate.jsx";
+import Me from "../views/Me.jsx";
 
 const routes = [
   {

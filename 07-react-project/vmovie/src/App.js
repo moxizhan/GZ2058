@@ -5,11 +5,11 @@ import "./Test.scss";
 import { Button, WhiteSpace, NavBar, Icon, Tabs } from "antd-mobile";
 import "antd-mobile/dist/antd-mobile.css"; // or 'antd-mobile/dist/antd-mobile.less'
 
-import { HashRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { Switch, Route, Link, useLocation } from "react-router-dom";
 
-import Find from "components/Find.jsx";
-import Cate from "components/Cate.jsx";
-import Me from "components/Me.jsx";
+import Find from "views/Find.jsx";
+import Cate from "views/Cate.jsx";
+import Me from "views/Me.jsx";
 
 // function RouteWithSubRoutes(route) {
 //   return (
@@ -23,65 +23,58 @@ import Me from "components/Me.jsx";
 //   );
 // }
 
-const tabs = [{ title: "发现" }, { title: "频道" }, { title: "我的" }];
+const tabs = [
+  { title: <Link to="/">发现</Link> },
+  { title: <Link to="/cate">分类</Link> },
+  { title: <Link to="/me">我的</Link> },
+];
 
 function App() {
+  let location = useLocation();
+  // console.log(location);
+  function currentTabIndex(pathname) {
+    switch (pathname) {
+      case "/me":
+        return 2;
+      case "/cate":
+        return 1;
+      default:
+        return 0;
+    }
+  }
   return (
-    <Router>
-      <div className="App">
-        <Link to="/">Find</Link>
-        <Link to="/cate">Cate</Link>
-        <Link to="/me">Me</Link>
+    <div className="App">
+      <NavBar
+        mode="light"
+        icon={<Icon type="left" />}
+        onLeftClick={() => console.log("onLeftClick")}
+        rightContent={[
+          <Icon key="0" type="search" style={{ marginRight: "16px" }} />,
+        ]}
+      >
+        <Tabs
+          tabs={tabs}
+          initialPage={currentTabIndex(location.pathname)}
+          onChange={(tab, index) => {
+            console.log("onChange", index, tab);
+          }}
+        ></Tabs>
+      </NavBar>
 
-        <NavBar
-          mode="light"
-          icon={<Icon type="left" />}
-          onLeftClick={() => console.log("onLeftClick")}
-          rightContent={[
-            <Icon key="0" type="search" style={{ marginRight: "16px" }} />,
-          ]}
-        >
-          <Tabs
-            tabs={tabs}
-            initialPage={1}
-            onChange={(tab, index) => {
-              console.log("onChange", index, tab);
-            }}
-          ></Tabs>
-        </NavBar>
+      <Switch>
+        <Route path="/cate">
+          <Cate />
+        </Route>
+        <Route path="/me">
+          <Me />
+        </Route>
+        <Route path="/">
+          <Find />
+        </Route>
+      </Switch>
 
-        <Switch>
-          
-          <Route path="/cate">
-            <Cate />
-          </Route>
-          <Route path="/me">
-            <Me />
-          </Route>
-          <Route path="/">
-            <Find />
-          </Route>
-        </Switch>
 
-        <header className="App-header">
-          <Button type="warning">warning</Button>
-          <WhiteSpace />
-          <Button type="warning">warning</Button>
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
-    </Router>
+    </div>
   );
 }
 
