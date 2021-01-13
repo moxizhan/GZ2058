@@ -4,6 +4,38 @@ import FindSection from "components/FindSection";
 
 export default function Find() {
   const [index, setIndex] = useState(null);
+  const [morePosts, setMorePosts] = useState([]);
+
+  function loadMore() {
+    let next_url;
+    let lastid;
+    // 确定上一页 链接 和 id
+    if (morePosts.length) {
+      next_url = morePosts[morePosts.length - 1].next_page_url_full;
+      lastid = morePosts[morePosts.length - 1].lastid;
+    } else {
+      next_url = index.posts.next_page_url_full;
+      lastid = index.posts.lastid;
+    }
+
+    // 查看本地存储
+    if (window.localStorage.getItem(lastid)) {
+      setMorePosts([
+        ...morePosts,
+        JSON.parse(window.localStorage.getItem(lastid)),
+      ]);
+    } else {
+      fetch("http://api.kele8.cn/agent/" + next_url)
+        .then(function (response) {
+          return response.json();
+        })
+        .then(function (myJson) {
+          console.log(myJson);
+          window.localStorage.setItem(lastid, JSON.stringify(myJson.data));
+          setMorePosts([...morePosts, myJson.data]);
+        });
+    }
+  }
 
   useEffect(() => {
     //   console.log(banner);
@@ -31,6 +63,12 @@ export default function Find() {
       <FindSection data={index.hot} />
       <FindSection data={index.album} />
       <FindSection data={index.posts} />
+
+      {morePosts.map((posts) => (
+        <FindSection key={posts.lastid} data={posts} />
+      ))}
+
+      <button onClick={loadMore}>more</button>
     </div>
   ) : null;
 }

@@ -10,6 +10,7 @@ import { Switch, Route, Link, useLocation } from "react-router-dom";
 import Find from "views/Find.jsx";
 import Cate from "views/Cate.jsx";
 import Me from "views/Me.jsx";
+import Play from "views/Play.jsx";
 
 // function RouteWithSubRoutes(route) {
 //   return (
@@ -38,28 +39,32 @@ function App() {
         return 2;
       case "/cate":
         return 1;
-      default:
+      case "/":
         return 0;
+      default:
+        return false;
     }
   }
   return (
     <div className="App">
-      <NavBar
-        mode="light"
-        icon={<Icon type="left" />}
-        onLeftClick={() => console.log("onLeftClick")}
-        rightContent={[
-          <Icon key="0" type="search" style={{ marginRight: "16px" }} />,
-        ]}
-      >
-        <Tabs
-          tabs={tabs}
-          initialPage={currentTabIndex(location.pathname)}
-          onChange={(tab, index) => {
-            console.log("onChange", index, tab);
-          }}
-        ></Tabs>
-      </NavBar>
+      {currentTabIndex(location.pathname) !== false && (
+        <NavBar
+          mode="light"
+          icon={<Icon type="left" />}
+          onLeftClick={() => console.log("onLeftClick")}
+          rightContent={[
+            <Icon key="0" type="search" style={{ marginRight: "16px" }} />,
+          ]}
+        >
+          <Tabs
+            tabs={tabs}
+            initialPage={currentTabIndex(location.pathname)}
+            onChange={(tab, index) => {
+              console.log("onChange", index, tab);
+            }}
+          ></Tabs>
+        </NavBar>
+      )}
 
       <Switch>
         <Route path="/cate">
@@ -68,12 +73,14 @@ function App() {
         <Route path="/me">
           <Me />
         </Route>
+
+        <Route path="/play/:id">
+          <Play />
+        </Route>
         <Route path="/">
           <Find />
         </Route>
       </Switch>
-
-
     </div>
   );
 }

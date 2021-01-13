@@ -10,17 +10,13 @@ export default class FindBanner extends Component {
       imgHeight: 176,
     };
   }
-  
+
   render() {
     return (
-      <Carousel
-        autoplay={false}
-        infinite
-        beforeChange={(from, to) => console.log(`slide from ${from} to ${to}`)}
-        afterChange={(index) => console.log("slide to", index)}
-      >
+      <Carousel autoplay={false} infinite>
         {this.props.items.map((val) => (
           <img
+            key={val.bannerid}
             src={val.image}
             alt=""
             style={{ width: "100%", verticalAlign: "top" }}
