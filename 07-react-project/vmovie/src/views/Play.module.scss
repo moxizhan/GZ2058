@@ -1,0 +1,16 @@
+.relates {
+  
+  .scroll {
+    width: 100%;
+    overflow-x: scroll;
+    ul {
+      color: red;
+      display: flex;
+      flex-wrap: nowrap;
+      li {
+        flex: 1 0 40%;
+        margin-right: 10px;
+      }
+    }
+  }
+}

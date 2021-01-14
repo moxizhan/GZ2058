@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 
-import VideoCard from 'components/VideoCard'
+import VideoCard from "components/VideoCard";
+
+import styles from "views/Play.module.scss";
 
 import { useParams } from "react-router-dom";
 
@@ -31,17 +33,19 @@ export default function Play() {
       <video controls src={post.content_video[0].progressive[3].url}></video>
       <h3>{post.title}</h3>
       <p>{post.intro}</p>
-
-      {post.relate_video.map(relate=> {
-          return (
-          <div>
-              <h3>{relate.name}</h3>
-          <ul>
-              {
-                  relate.list.map(item=> <VideoCard item={item} />)
-              }
-          </ul>
-          </div>)
+      {post.relate_video.map((relate) => {
+        return (
+          <div className={styles.relates}>
+            <h3>{relate.name}</h3>
+            <div className={styles.scroll}>
+              <ul>
+                {relate.list.map((item) => (
+                  <VideoCard item={item} />
+                ))}
+              </ul>
+            </div>
+          </div>
+        );
       })}
     </div>
   ) : null;

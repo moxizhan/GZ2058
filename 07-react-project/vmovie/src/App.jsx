@@ -1,8 +1,8 @@
-import logo from "./logo.svg";
-import "./App.css";
+import "./App.scss";
 import "./Test.scss";
+import { useState } from "react";
 
-import { Button, WhiteSpace, NavBar, Icon, Tabs } from "antd-mobile";
+import { NavBar, Icon, Tabs } from "antd-mobile";
 import "antd-mobile/dist/antd-mobile.css"; // or 'antd-mobile/dist/antd-mobile.less'
 
 import { Switch, Route, Link, useLocation } from "react-router-dom";
@@ -11,6 +11,9 @@ import Find from "views/Find.jsx";
 import Cate from "views/Cate.jsx";
 import Me from "views/Me.jsx";
 import Play from "views/Play.jsx";
+import Test from "views/Test.jsx";
+
+import getDayCover from "api/getDayCover";
 
 // function RouteWithSubRoutes(route) {
 //   return (
@@ -31,6 +34,8 @@ const tabs = [
 ];
 
 function App() {
+  const [dayCover, setDayCover] = useState(null);
+  const [showDayCover, setShowDayCover] = useState(true);
   let location = useLocation();
   // console.log(location);
   function currentTabIndex(pathname) {
@@ -45,13 +50,26 @@ function App() {
         return false;
     }
   }
+
+  function onLeftClick() {
+    // 抽离api请求
+    // console.log(getDayCover());
+
+    if (!dayCover) {
+      getDayCover().then((res) => {
+        // console.log(res);
+        setDayCover(res.data);
+      });
+    }
+    setShowDayCover(true);
+  }
   return (
     <div className="App">
       {currentTabIndex(location.pathname) !== false && (
         <NavBar
           mode="light"
           icon={<Icon type="left" />}
-          onLeftClick={() => console.log("onLeftClick")}
+          onLeftClick={onLeftClick}
           rightContent={[
             <Icon key="0" type="search" style={{ marginRight: "16px" }} />,
           ]}
@@ -77,10 +95,25 @@ function App() {
         <Route path="/play/:id">
           <Play />
         </Route>
+        <Route path="/test">
+          <Test />
+        </Route>
         <Route path="/">
           <Find />
         </Route>
       </Switch>
+
+      {dayCover && showDayCover && (
+        <div
+          className="daycover"
+          style={{ background: 'url("' + dayCover.image_blurred + '")' }}
+          onClick={() => setShowDayCover(false)}
+        >
+          <div className="main">
+            <img src={dayCover.image} alt="" />
+          </div>
+        </div>
+      )}
     </div>
   );
 }

@@ -37,6 +37,14 @@ export default function Find() {
     }
   }
 
+  function findScroll(e) {
+    console.log(e.target.scrollHeight, e.target.scrollTop, e.target.offsetHeight);
+    if (e.target.scrollHeight === e.target.scrollTop +e.target.offsetHeight) {
+      console.log('到底了');
+      loadMore()
+    }
+  }
+
   useEffect(() => {
     //   console.log(banner);
     //   setInterval(() => {
@@ -57,7 +65,7 @@ export default function Find() {
   // 第二个参数 shouldComponentUpdate
 
   return index ? (
-    <div className="find">
+    <div className="find" onScroll={findScroll} style={{height: 'calc(100vh - 45px)', overflowY: 'scroll'}}>
       <FindBanner items={index.banner.list} />
       <FindSection data={index.today} />
       <FindSection data={index.hot} />
