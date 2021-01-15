@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <script src="https://cdn.staticfile.org/react/17.0.1/umd/react.production.min.js"></script>
+    <script src="https://cdn.staticfile.org/react-dom/17.0.1/umd/react-dom.production.min.js"></script>
+    <script src="https://cdn.staticfile.org/babel-standalone/6.26.0/babel.min.js"></script>
+    <script src="https://unpkg.com/react-transition-group@4.4.1/dist/react-transition-group.js"></script>
+  </head>
+
+  <body>
+    <div id="app"></div>
+    <style>
+      /* 动画开始瞬间 初始样式 */
+      .my-node-enter {
+        opacity: 0;
+      }
+      /* 动画过程样式 需要变化到的状态 过渡时间 */
+      .my-node-enter-active {
+        opacity: 1;
+        transition: opacity 5s;
+      }
+      /* 最终态 */
+      .my-node-enter-done {
+        opacity: 1;
+        color: red;
+      }
+
+      /* 动画开始瞬间 初始样式 */
+      .my-node-exit {
+        opacity: 1;
+      }
+      /* 动画过程样式 需要变化到的状态 过渡时间 */
+      .my-node-exit-active {
+        opacity: 0;
+        transition: opacity 5s;
+      }
+      /* 最终态 */
+      .my-node-exit-done {
+        opacity: 0;
+        color: red;
+      }
+
+      .my-node-appear {
+        width: 100px;
+        height: 100px;
+        background: red;
+      }
+
+      /*  */
+
+      .msg-box {
+        width: 100px;
+        height: 100px;
+        background: red;
+      }
+
+      .msg-appear {
+        transform: scale(0.6);
+        opacity: 0;
+      }
+      .msg-appear-active {
+        transform: scale(1);
+        opacity: 1;
+        transition: all 0.8s;
+      }
+      .msg-appear-done {
+      }
+
+      .msg-enter {
+        transform: scale(0.6);
+        opacity: 0;
+      }
+      .msg-enter-active {
+        transform: scale(1);
+        opacity: 1;
+        transition: all 0.8s;
+      }
+      .msg-enter-done {
+      }
+
+      .msg-exit {
+        transform: scale(1);
+        opacity: 1;
+      }
+      .msg-exit-active {
+        transform: scale(0.6);
+        opacity: 0;
+        transition: all 0.8s;
+      }
+    </style>
+
+    <script type="text/babel">
+      const { useState } = React;
+      const { CSSTransition, Transition } = ReactTransitionGroup;
+
+      function App(props) {
+        const [inProp, setInProp] = useState(true);
+        const [showMsg, setShowMsg] = useState(true);
+        return (
+          <div>
+            {/* {inProp && <div>{"I'll receive my-node-* classes"}</div>} */}
+
+            <CSSTransition
+              in={inProp}
+              unmountOnExit
+              timeout={5000}
+              classNames="my-node"
+            >
+              <div>{"I'll receive my-node-* classes"}</div>
+            </CSSTransition>
+            <button type="button" onClick={() => setInProp(!inProp)}>
+              Click to Enter
+            </button>
+
+            <hr />
+
+            <button type="button" onClick={() => setShowMsg(!showMsg)}>
+              Click to Enter
+            </button>
+            <CSSTransition
+              appear={showMsg}
+              in={showMsg}
+              unmountOnExit
+              timeout={800}
+              classNames="msg"
+            >
+              <div className="msg-box">{"I'll receive my-node-* classes"}</div>
+            </CSSTransition>
+          </div>
+        );
+      }
+
+      ReactDOM.render(<App />, document.querySelector("#app"));
+    </script>
+  </body>
+</html>

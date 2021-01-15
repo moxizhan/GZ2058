@@ -1,5 +1,5 @@
 import "./App.scss";
-import "./Test.scss";
+import './styles.css'
 import { useState } from "react";
 
 import { NavBar, Icon, Tabs } from "antd-mobile";
@@ -11,9 +11,9 @@ import Find from "views/Find.jsx";
 import Cate from "views/Cate.jsx";
 import Me from "views/Me.jsx";
 import Play from "views/Play.jsx";
-import Test from "views/Test.jsx";
 
 import getDayCover from "api/getDayCover";
+import { CSSTransition, TransitionGroup } from "react-transition-group";
 
 // function RouteWithSubRoutes(route) {
 //   return (
@@ -84,24 +84,25 @@ function App() {
         </NavBar>
       )}
 
-      <Switch>
-        <Route path="/cate">
-          <Cate />
-        </Route>
-        <Route path="/me">
-          <Me />
-        </Route>
+      <TransitionGroup className="xxx">
+        <CSSTransition key={location.key} classNames="fade" timeout={300}>
+          <Switch location={location}>
+            <Route path="/cate">
+              <Cate />
+            </Route>
+            <Route path="/me">
+              <Me />
+            </Route>
 
-        <Route path="/play/:id">
-          <Play />
-        </Route>
-        <Route path="/test">
-          <Test />
-        </Route>
-        <Route path="/">
-          <Find />
-        </Route>
-      </Switch>
+            <Route path="/play/:id">
+              <Play />
+            </Route>
+            <Route path="/">
+              <Find />
+            </Route>
+          </Switch>
+        </CSSTransition>
+      </TransitionGroup>
 
       {dayCover && showDayCover && (
         <div
