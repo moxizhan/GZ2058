@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <script src="https://unpkg.com/redux@4.0.5/dist/redux.min.js"></script>
+    </head>
+    <body>
+        <!-- https://github.com/reduxjs/redux-devtools -->
+        <script>
+            console.log(Redux);
+
+            // applyMiddleware: ƒ ()
+            // bindActionCreators: ƒ (e,t)
+            // combineReducers: ƒ (e)
+            // compose: ƒ f()
+            // createStore: ƒ e(r,o,i)
+
+            // store reducer action
+
+            // createStore(函数参数) => store
+            // reducer函数 =>纯函数
+
+            const { createStore } = Redux;
+
+            // reducer
+            // function counter(state = 10, action) {
+            //     return state
+            // }
+
+            // 描述 action 如何改变 state 树
+            function counter(state = 20, action) {
+                switch (action.type) {
+                    case "INCREMENT":
+                        return state + 1;
+                    case "DECREMENT":
+                        return state - 5;
+                        // 纯函数 不能修改入参
+                    default:
+                        return state;
+                    // 默认必须有 这样才有初始值
+                }
+            }
+
+            // store
+            let store = createStore(
+                counter,
+                window.__REDUX_DEVTOOLS_EXTENSION__ &&
+                    window.__REDUX_DEVTOOLS_EXTENSION__()
+            );
+            // https://github.com/zalmoxisus/redux-devtools-extension#installation
+            // dispatch: ƒ y(e)
+            // getState: ƒ p()
+            // replaceReducer: ƒ (e)
+            // subscribe: ƒ h(e)
+
+            console.log(store, store.getState());
+
+            // 订阅更新 监听 store里面state的变化 如果变化 执行回调函数
+            store.subscribe(function () {
+                console.log(store.getState());
+            });
+
+            // action 就是一个简单对象 描述了 发生什么事情的对象
+            // 改变内部 state 惟一方法是 dispatch 一个 action。
+            // 你应该把要做的修改变成一个普通对象，这个对象被叫做 action，而不是直接修改 state。
+
+            store.dispatch({ type: "INCREMENT" });
+            // store.dispatch(action)
+
+            // setInterval(() => {
+            //     store.dispatch({ type: "INCREMENT" })
+            // }, 2000);
+
+            // Redux  state store action reducer
+            // Redux.createStore(reducer) => store
+            // reducer 描述如何变化state ===>>>> action
+            // store.getState()
+            // store.subscribe(回调函数) 监听state变化
+            // store.dispatch(action) { type: "INCREMENT" }
+            //
+
+            store.dispatch({ type: "DECREMENT" });
+        </script>
+    </body>
+</html>
