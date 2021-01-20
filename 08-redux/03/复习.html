@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <script src="https://unpkg.com/redux@4.0.5/dist/redux.min.js"></script>
+    </head>
+    <body>
+        <script>
+            const { createStore } = Redux;
+
+            // function counterReducer(state = 10, action) {
+            //     switch (action.type) {
+            //         case "INCREMENT":
+            //             // return state + 1;
+            //             return ++state
+
+            //         default:
+            //             return state;
+            //     }
+            // }
+            // ???
+            let obj = { count: 10, msg: "hello", test: { x: 20 } };
+
+            function counterReducer(state = obj, action) {
+                switch (action.type) {
+                    case "INCREMENT":
+                        // return state.count + 1;
+                        return { ...state, count: state.count + 1 };
+                    // return { ...state, count: ++state.count };
+                    // state.test.x += 5;
+                    // return state;
+                    // 不雅修改入参 【历史快照会出问题 调试工具 回溯】
+
+                    default:
+                        return state;
+                }
+            }
+
+            let store = createStore(
+                counterReducer,
+                window.__REDUX_DEVTOOLS_EXTENSION__ &&
+                    window.__REDUX_DEVTOOLS_EXTENSION__()
+            );
+
+            store.subscribe(function () {
+                console.log(store.getState());
+            });
+        </script>
+    </body>
+</html>
