@@ -9,7 +9,7 @@ import { mapState } from "vuex";
 export default {
   computed: mapState(["bookrack"]),
   created() {
-    this.axios.get("http://novel.kele8.cn/rank-category").then((response) => {
+    this.axios.get("https://novel.kele8.cn/rank-category").then((response) => {
       // this.category = response.data;
       this.$store.commit("updateRankCategory", response.data);
     });

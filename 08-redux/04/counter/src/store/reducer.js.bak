@@ -1,0 +1,18 @@
+import { DECREMENT } from "./actionTypes";
+
+export default function reducer(
+    state = { n: 10, msg: "hello", friends: [11, 22, 33] },
+    action
+) {
+    switch (action.type) {
+        case "INCREMENT":
+            return { ...state, n: state.n + 1 };
+        case DECREMENT:
+            return { ...state, n: state.n - 1 };
+        case "ADDFRIEND":
+            return { ...state, friends: [...state.friends, 44] };
+
+        default:
+            return state;
+    }
+}

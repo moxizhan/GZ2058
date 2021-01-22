@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <script src="https://unpkg.com/react@17/umd/react.production.min.js"></script>
+        <script src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js"></script>
+        <script src="https://unpkg.com/redux@4.0.5/dist/redux.min.js"></script>
+        <script src="https://unpkg.com/react-redux@7.2.2/dist/react-redux.js"></script>
+        <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    </head>
+    <body>
+        <div id="app"></div>
+        <script type="text/babel">
+            const { createStore } = Redux;
+
+            function counterReducer(
+                state = { count: 10, msg: "hello" },
+                action
+            ) {
+                switch (action.type) {
+                    case "INCREMENT":
+                        return { ...state, count: state.count + 1 };
+                    default:
+                        return state;
+                }
+            }
+
+            let store = createStore(
+                counterReducer,
+                window.__REDUX_DEVTOOLS_EXTENSION__ &&
+                    window.__REDUX_DEVTOOLS_EXTENSION__()
+            );
+
+            store.subscribe(function () {
+                console.log(store.getState());
+            });
+
+            // ###############
+
+            const { connect, Provider } = ReactRedux;
+
+            // 把state里面的部分 状态映射到 props 按需
+            const mapStateToProps = (state) => {
+                return {
+                    n: state.count,
+                    // msg: state.msg
+                };
+            };
+
+            const mapDispatchToProps = (dispatch) => {
+                return {
+                    clickHandler: () => dispatch({ type: "INCREMENT" }),
+                };
+            };
+
+            // connect(1,2)两个参数 connect(1,2)(展示组件) 返回一个新的函数（容器组件）
+
+            // connect方法 作用根据展示组件 生成容器组件
+            const CounterContainer = connect(
+                mapStateToProps,
+                mapDispatchToProps
+            )(Counter);
+
+            // ################
+            function Counter(props) {
+                return (
+                    <div>
+                        <b>{props.n}</b>
+                        <button onClick={() => props.clickHandler()}>+1</button>
+                    </div>
+                );
+            }
+
+            // 1 先写展示组件
+            function Message(props) {
+                return <h3>msg: {props.msg}</h3>;
+            }
+            // 2 确定这个展示组件需要store。state 里面的那些数据
+            // 3 根据实际需要的状态  写mapStateToProps
+            function mapStateToProps2(state) {
+                return {
+                    msg: state.msg,
+                };
+            }
+            // 4 根据展示组件 和 mapStateToProps 使用 connect 生成容器组件
+            const MessageContainer = connect(mapStateToProps2)(Message);
+
+            function App() {
+                // return <Counter />;
+                return (
+                    <div className="app">
+                        <CounterContainer />
+                        <hr />
+                        {/* <Message /> */}
+                        <MessageContainer />
+                    </div>
+                );
+            }
+
+            ReactDOM.render(
+                <Provider store={store}>
+                    <App />
+                </Provider>,
+
+                document.querySelector("#app")
+            );
+        </script>
+    </body>
+</html>
