@@ -10,7 +10,7 @@
     "navigationBarBackgroundColor": "#f00",
     "navigationBarTitleText": "小程序",
     "navigationBarTextStyle": "white",
-    "enablePullDownRefresh": true,
+    "enablePullDownRefresh": false,
     "backgroundColor": "#ff0"
   },
   "tabBar": {

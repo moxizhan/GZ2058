@@ -1,28 +1,38 @@
 <!--pages/test/test.wxml-->
 <text>pages/test/test.wxml</text>
-<view class="test">hello</view>
+<view class="test" >hello</view>
 <!-- 插值 -->
 <view>{{msg}}</view>
 
 <!-- for -->
-<view wx:for="{{arr}}" wx:key="index">{{item}}</view>
+<view wx:for="{{arr}}" wx:key="index" data-xx="{{item}}" bindtap="tapHandler">{{item}}</view>
 
 
 <!-- for 嵌套 -->
-<view class="row" wx:for="{{zuowei}}" wx:for-item="row">
-  <text wx:for="{{row}}" wx:for-item="col">{{col}}</text>
+<view class="row" wx:for="{{zuowei}}" wx:for-item="row" wx:key="index">
+  <text wx:for="{{row}}" wx:for-item="col" wx:key="index">{{col}}</text>
 </view>
 
 <!-- if -->
 <view wx:if="{{boolean}}">根据条件显示</view>
 <view wx:else>条件为假</view>
 
-<view class="row" wx:for="{{zuowei}}" wx:for-item="row">
+<view class="row" wx:for="{{zuowei}}" wx:for-item="row" wx:key="index">
   <!-- <text wx:if="col" class="seat i" wx:for="{{row}}" wx:for-item="col"></text> -->
   <!-- <text wx:else class="seat v" wx:for="{{row}}" wx:for-item="col"></text> -->
 
-  <block wx:for="{{row}}" wx:for-item="col">
+  <block wx:for="{{row}}" wx:for-item="col" wx:for-index="idx" wx:key="idx">
     <text wx:if="{{col}}" class="seat i"></text>
     <text wx:else class="seat v"></text>
   </block>
 </view>
+
+<!-- 模板 复用html结构 -->
+<template name="xxx">
+  <view class="greet">
+    <text>Hello {{name}}</text>
+  </view>
+</template>
+
+<template is="xxx" data="{{name: 'nick'}}"></template>
+<template is="xxx" data="{{name: 'mark'}}"></template>

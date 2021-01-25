@@ -1,20 +1,45 @@
-// pages/test/test.js
+// 获取应用实例
+const app = getApp()
+console.log(app);
+
+// 类似vue Mixin 混入 复用逻辑  
+var myBehavior = require('../../mixin/my-behavior.js')
+
 Page({
+  behaviors: [myBehavior],
 
   /**
    * 页面的初始数据
    */
   data: {
-    msg: 'Hello World',
-    arr: [11,22,33],
+    // msg: 'Hello World',
+    msg: app.globalData.globalData,
+
+    arr: [11, 22, 33],
     zuowei: [
-      [1,0,0,0,0,1],
-      [0,0,0,0,0,1],
-      [0,0,1,1,0,0],
-      [0,0,0,0,0,0]
+      [1, 0, 0, 0, 0, 1],
+      [0, 0, 0, 0, 0, 1],
+      [0, 0, 1, 1, 0, 0],
+      [0, 0, 0, 0, 0, 0],
+      [1, 0, 0, 0, 0, 1],
+      [0, 0, 0, 0, 0, 1],
+      [0, 0, 1, 1, 0, 0],
+      [0, 0, 0, 0, 0, 0],
+      [1, 0, 0, 0, 0, 1],
+      [0, 0, 0, 0, 0, 1],
+      [0, 0, 1, 1, 0, 0],
+      [0, 0, 0, 0, 0, 0],
+      [1, 0, 0, 0, 0, 1],
+      [0, 0, 0, 0, 0, 1],
+      [0, 0, 1, 1, 0, 0],
+      [0, 0, 0, 0, 0, 0]
     ],
     boolean: true
+  },
 
+  // 事件处理程序
+  tapHandler(e) {
+    console.log(Date.now(),e, e.target.dataset.xx);
   },
 
   /**
@@ -56,13 +81,14 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-
+    console.log("test页面 onPullDownRefresh");
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
+    console.log("test页面 onReachBottom");
 
   },
 

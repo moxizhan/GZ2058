@@ -1,3 +1,5 @@
+
+
 // app.js
 App({
   onLaunch(options) {
@@ -37,7 +39,21 @@ App({
       }
     })
   },
+
+  // 页面间共享数据 类似vue里面的store模式
   globalData: {
-    userInfo: null
+    userInfo: null,
+    globalData: 'I am global data'
+  },
+
+  onShow() {
+    console.log("onShow");
+  },
+  onHide() {
+    console.log("onHide");
+
+  },
+  onThemeChange(options) {
+    console.log("onThemeChange", options);
   }
 })
