@@ -1,0 +1,28 @@
+<!--pages/test/test.wxml-->
+<text>pages/test/test.wxml</text>
+<view class="test">hello</view>
+<!-- 插值 -->
+<view>{{msg}}</view>
+
+<!-- for -->
+<view wx:for="{{arr}}" wx:key="index">{{item}}</view>
+
+
+<!-- for 嵌套 -->
+<view class="row" wx:for="{{zuowei}}" wx:for-item="row">
+  <text wx:for="{{row}}" wx:for-item="col">{{col}}</text>
+</view>
+
+<!-- if -->
+<view wx:if="{{boolean}}">根据条件显示</view>
+<view wx:else>条件为假</view>
+
+<view class="row" wx:for="{{zuowei}}" wx:for-item="row">
+  <!-- <text wx:if="col" class="seat i" wx:for="{{row}}" wx:for-item="col"></text> -->
+  <!-- <text wx:else class="seat v" wx:for="{{row}}" wx:for-item="col"></text> -->
+
+  <block wx:for="{{row}}" wx:for-item="col">
+    <text wx:if="{{col}}" class="seat i"></text>
+    <text wx:else class="seat v"></text>
+  </block>
+</view>
